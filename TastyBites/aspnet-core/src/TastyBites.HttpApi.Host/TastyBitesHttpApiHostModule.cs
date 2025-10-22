@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using OpenIddict.Server;
 using TastyBites.EntityFrameworkCore;
 using TastyBites.MultiTenancy;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
@@ -53,6 +55,26 @@ public class TastyBitesHttpApiHostModule : AbpModule
                 options.AddAudiences("TastyBites");
                 options.UseLocalServer();
                 options.UseAspNetCore();
+            });
+            
+            // Override the server configuration to avoid macOS keychain issues
+            builder.AddServer(options =>
+            {
+                options.AllowClientCredentialsFlow();
+                options.AllowAuthorizationCodeFlow();
+                options.AllowRefreshTokenFlow();
+                
+                options.SetIssuer(new Uri("http://localhost:5001"));
+                
+                // Use symmetric keys instead of certificates
+                var key = new SymmetricSecurityKey(Convert.FromBase64String("DRjd/GnduI3Efzen9V9BvbNUfc/VKgXltV7Kbk9sMkY="));
+                options.AddEncryptionKey(key);
+                options.AddSigningKey(key);
+                
+                options.UseAspNetCore()
+                       .EnableTokenEndpointPassthrough()
+                       .EnableAuthorizationEndpointPassthrough()
+                       .EnableUserinfoEndpointPassthrough();
             });
         });
     }
