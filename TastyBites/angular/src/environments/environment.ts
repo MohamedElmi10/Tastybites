@@ -19,7 +19,7 @@ export const environment = {
   },
   apis: {
     default: {
-      url: 'https://localhost:44399',
+      url: 'http://localhost:5001',
       rootNamespace: 'TastyBites',
     },
   },
