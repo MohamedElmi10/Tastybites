@@ -12,6 +12,8 @@ using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
+using TastyBites.Recipes;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 
 namespace TastyBites.EntityFrameworkCore;
 
@@ -51,6 +53,9 @@ public class TastyBitesDbContext :
     public DbSet<Tenant> Tenants { get; set; }
     public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
 
+    // TastyBites
+    public DbSet<Recipe> Recipes { get; set; }
+
     #endregion
 
     public TastyBitesDbContext(DbContextOptions<TastyBitesDbContext> options)
@@ -82,5 +87,11 @@ public class TastyBitesDbContext :
         //    b.ConfigureByConvention(); //auto configure for the base class props
         //    //...
         //});
+         builder.Entity<Recipe>(b =>
+        {
+           b.ToTable(TastyBitesConsts.DbTablePrefix + "Recipes", TastyBitesConsts.DbSchema);
+           b.ConfigureByConvention(); //auto configure for the base class props
+           //...
+        });
     }
 }
