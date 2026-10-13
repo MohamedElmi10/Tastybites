@@ -10,12 +10,12 @@ export const environment = {
     logoUrl: '',
   },
   oAuthConfig: {
-    issuer: 'https://localhost:44399/',
+    issuer: 'http://localhost:5001/',
     redirectUri: baseUrl,
     clientId: 'TastyBites_App',
     responseType: 'code',
     scope: 'offline_access TastyBites',
-    requireHttps: true,
+    requireHttps: false,
   },
   apis: {
     default: {

@@ -71,10 +71,16 @@ public class TastyBitesHttpApiHostModule : AbpModule
                 options.AddEncryptionKey(key);
                 options.AddSigningKey(key);
                 
-                options.UseAspNetCore()
+                var aspNetCore = options.UseAspNetCore()
                        .EnableTokenEndpointPassthrough()
                        .EnableAuthorizationEndpointPassthrough()
                        .EnableUserinfoEndpointPassthrough();
+
+                // Local dev runs over plain http (localhost:5001), so allow non-HTTPS requests in Development only
+                if (context.Services.GetHostingEnvironment().IsDevelopment())
+                {
+                    aspNetCore.DisableTransportSecurityRequirement();
+                }
             });
         });
     }
