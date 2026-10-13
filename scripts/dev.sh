@@ -4,6 +4,7 @@
 #   ./scripts/dev.sh libs      -> download the login page styles into the API's wwwroot/libs
 #   ./scripts/dev.sh backend   -> run the API on http://localhost:5001  (Swagger: /swagger)
 #   ./scripts/dev.sh admin     -> run the admin app (admin.angular) on http://localhost:4200
+#   ./scripts/dev.sh proxy     -> generate Angular API services from the running backend
 #   ./scripts/dev.sh frontend  -> run Angular on http://localhost:4200
 set -euo pipefail
 
@@ -108,6 +109,14 @@ admin() {
   npx ng serve --open
 }
 
+proxy() {
+  # Reads the running API (localhost:5001) and generates typed Angular services into admin.angular/src/app/proxy
+  use_dotnet7
+  use_node18
+  curl -sf http://localhost:5001/api/abp/api-definition >/dev/null || fail "Backend isn't running. Start it first: ./scripts/dev.sh backend"
+  cd "$ADMIN_NG" && abp generate-proxy -t ng
+}
+
 frontend() {
   use_node18
   cd "$NG" && npx ng serve --open
@@ -118,6 +127,7 @@ case "${1:-}" in
   libs) libs ;;
   backend) backend ;;
   admin) admin ;;
+  proxy) proxy ;;
   frontend) frontend ;;
-  *) echo "usage: ./scripts/dev.sh {setup|libs|backend|admin|frontend}"; exit 1 ;;
+  *) echo "usage: ./scripts/dev.sh {setup|libs|backend|admin|proxy|frontend}"; exit 1 ;;
 esac
