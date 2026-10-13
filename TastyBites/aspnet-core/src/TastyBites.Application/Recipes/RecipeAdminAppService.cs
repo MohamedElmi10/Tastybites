@@ -5,6 +5,7 @@ using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TastyBites.Recipes
 {
@@ -23,8 +24,6 @@ namespace TastyBites.Recipes
         //overiding a public method/function from the base class
         public override  async Task<RecipeDto> GetAsync(int id){
             var recipe = await _recipesRepository.GetAsync(id);
-            // custom logic here
-            recipe.Name = recipe.Name.Substring(1);
             var recipeDto = ObjectMapper.Map<Recipe, RecipeDto>(recipe);
             return recipeDto;
         }
@@ -33,7 +32,7 @@ namespace TastyBites.Recipes
         public override async Task<RecipeDto> CreateAsync(RecipeDto input){
             var recipe = ObjectMapper.Map<RecipeDto, Recipe>(input);
             recipe.Name = recipe.Name.Trim();
-            recipe.Name = recipe.Description.Trim();
+            recipe.Description = recipe.Description.Trim();
             await _recipesRepository.InsertAsync(recipe, autoSave: true);
             var recipeDto = ObjectMapper.Map<Recipe, RecipeDto>(recipe);
             return recipeDto;
@@ -52,12 +51,6 @@ namespace TastyBites.Recipes
         }
         //override the delete method
         public override async Task DeleteAsync (int id){
-            var recipe = await _recipesRepository.GetAsync(id);
-
-            // Custom logic
-            if(recipe.Name.Contains("Butter Chicken", StringComparison.OrdinalIgnoreCase)){
-                throw new UserFriendlyException("You cannot delete chicken recipes");
-            }
             await _recipesRepository.DeleteAsync(id);
         }
         //overriding-the-read-operation-paged-list
@@ -72,6 +65,17 @@ namespace TastyBites.Recipes
             var recipeDtos = ObjectMapper.Map< List<Recipe>, List<RecipeDto>>(recipes);
             var PagedResultDto= new PagedResultDto<RecipeDto>(totalCount,recipeDtos);
             return PagedResultDto;
+        }
+
+        // Custom method: newest recipes first (highest Id = most recently added)
+        public async Task<List<RecipeDto>> GetRecentAsync(int count = 3)
+        {
+            count = Math.Clamp(count, 1, 50);
+            var queryable = await _recipesRepository.GetQueryableAsync();
+            var recipes = await AsyncExecuter.ToListAsync(
+                queryable.OrderByDescending(r => r.Id).Take(count)
+            );
+            return ObjectMapper.Map<List<Recipe>, List<RecipeDto>>(recipes);
         }
     
     }
