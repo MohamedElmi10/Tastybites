@@ -1,10 +1,14 @@
 <div class="card recipe-form">
   <div class="card-header">
-    <h5 class="card-title mb-0">{{ '::Recipes:Create' | abpLocalization }}</h5>
+    <h5 class="card-title mb-0">
+      {{ (isEditMode ? '::Recipes:Edit' : '::Recipes:Create') | abpLocalization }}
+    </h5>
   </div>
 
   <form [formGroup]="form" (ngSubmit)="save()" novalidate>
     <div class="card-body">
+      <p class="text-muted" *ngIf="loading">{{ '::Recipes:Loading' | abpLocalization }}</p>
+
       <div class="mb-3">
         <label class="form-label" for="recipe-name">{{ '::Recipes:Name' | abpLocalization }} *</label>
         <input
@@ -36,9 +40,9 @@
       <a class="btn btn-outline-secondary" routerLink="/recipes/list">
         {{ '::Recipes:Cancel' | abpLocalization }}
       </a>
-      <button type="submit" class="btn btn-primary" [disabled]="form.invalid || saving">
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid || saving || loading">
         <i class="fas me-1" [class.fa-save]="!saving" [class.fa-spinner]="saving" [class.fa-spin]="saving"></i>
-        {{ '::Recipes:Save' | abpLocalization }}
+        {{ (isEditMode ? '::Recipes:SaveChanges' : '::Recipes:Save') | abpLocalization }}
       </button>
     </div>
   </form>
