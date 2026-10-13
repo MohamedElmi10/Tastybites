@@ -1,5 +1,6 @@
-import { AuthService } from '@abp/ng.core';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Observable, map } from 'rxjs';
+import { RecipeDto, RecipeService } from '@proxy/recipes';
 
 @Component({
   selector: 'app-home',
@@ -7,13 +8,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  get hasLoggedIn(): boolean {
-    return this.authService.isAuthenticated;
-  }
+  private readonly recipeService = inject(RecipeService);
 
-  constructor(private authService: AuthService) {}
+  // GET /api/app/recipe/recent?count=3 -> newest first (highest Id)
+  readonly recent$: Observable<RecipeDto[]> = this.recipeService.getRecent(3);
 
-  login() {
-    this.authService.navigateToLogin();
-  }
+  // GET /api/app/recipe -> only used for the "N recipes" count
+  readonly total$: Observable<number> = this.recipeService.getList().pipe(map(list => list.length));
 }
