@@ -8,6 +8,10 @@
     "Recipes:List": "Recipes",
     "Recipes:Create": "New recipe",
     "Recipes:Edit": "Edit recipe",
-    "Recipes:BackToList": "Back to recipes"
+    "Recipes:BackToList": "Back to recipes",
+    "Recipes:Name": "Name",
+    "Recipes:Description": "Description",
+    "Recipes:Loading": "Loading recipes…",
+    "Recipes:Empty": "No recipes yet. Create the first one."
   }
 }
