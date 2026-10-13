@@ -8,6 +8,7 @@ import { RecipeAdminService, RecipeDto } from '@proxy/recipes';
 // Same limits as RecipeConsts.cs on the backend
 const NAME_MAX_LENGTH = 128;
 const DESCRIPTION_MAX_LENGTH = 1000;
+const IMAGE_URL_MAX_LENGTH = 512;
 
 // One component for both creating and editing a recipe:
 //   /recipes/create   -> create mode
@@ -30,11 +31,21 @@ export class CrudRecipeComponent implements OnInit {
   readonly form = this.fb.nonNullable.group({
     name: ['', [Validators.required, Validators.maxLength(NAME_MAX_LENGTH)]],
     description: ['', [Validators.required, Validators.maxLength(DESCRIPTION_MAX_LENGTH)]],
+    // Optional photo link; must start with http:// or https:// when filled in
+    imageUrl: ['', [Validators.maxLength(IMAGE_URL_MAX_LENGTH), Validators.pattern(/^https?:\/\/\S+$/i)]],
   });
+
+  // Set when the browser can't load the image at the given address
+  previewFailed = false;
 
   recipeId: number | null = null;
   loading = false;
   saving = false;
+
+  get previewUrl(): string | null {
+    const control = this.form.controls.imageUrl;
+    return control.value && control.valid ? control.value.trim() : null;
+  }
 
   get isEditMode(): boolean {
     return this.recipeId !== null;
@@ -52,7 +63,11 @@ export class CrudRecipeComponent implements OnInit {
       .pipe(finalize(() => (this.loading = false)))
       .subscribe(recipe => {
         // Fill the form with the saved values
-        this.form.patchValue({ name: recipe.name, description: recipe.description });
+        this.form.patchValue({
+          name: recipe.name,
+          description: recipe.description,
+          imageUrl: recipe.imageUrl ?? '',
+        });
       });
   }
 
@@ -62,7 +77,12 @@ export class CrudRecipeComponent implements OnInit {
       return;
     }
 
-    const input: RecipeDto = this.form.getRawValue();
+    const { name, description, imageUrl } = this.form.getRawValue();
+    const input: RecipeDto = {
+      name,
+      description,
+      imageUrl: imageUrl.trim() || undefined, // empty field = no image (sent as null)
+    };
     const request$: Observable<RecipeDto> = this.isEditMode
       ? this.recipeAdminService.update(this.recipeId!, input)
       : this.recipeAdminService.create(input);

@@ -21,6 +21,13 @@
       >
         <ngx-datatable-column name="ID" prop="id" [width]="70" [maxWidth]="90"></ngx-datatable-column>
 
+        <ngx-datatable-column name="" prop="imageUrl" [sortable]="false" [width]="80" [maxWidth]="90">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            <img *ngIf="value; else noImage" class="thumb" [src]="value" alt="" />
+            <ng-template #noImage><span class="thumb thumb-empty"><i class="fas fa-utensils"></i></span></ng-template>
+          </ng-template>
+        </ngx-datatable-column>
+
         <ngx-datatable-column [name]="'::Recipes:Name' | abpLocalization" prop="name" [width]="200">
           <ng-template let-value="value" ngx-datatable-cell-template>
             <span class="fw-semibold">{{ value }}</span>

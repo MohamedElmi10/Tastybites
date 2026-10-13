@@ -7,3 +7,18 @@
 :host ::ng-deep .recipes-table.ngx-datatable.material {
   box-shadow: none;
 }
+
+.thumb {
+  width: 56px;
+  height: 42px;
+  border-radius: 6px;
+  object-fit: cover;
+  display: inline-block;
+}
+
+.thumb-empty {
+  display: inline-grid;
+  place-items: center;
+  background: var(--bs-tertiary-bg, #f1f3f5);
+  color: var(--bs-secondary-color, #adb5bd);
+}
