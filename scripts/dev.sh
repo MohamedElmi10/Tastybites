@@ -6,14 +6,14 @@
 #   ./scripts/dev.sh admin     -> run the admin app (admin.angular) on http://localhost:4200
 #   ./scripts/dev.sh proxy     -> generate Angular API services from the running backend
 #   ./scripts/dev.sh migrate   -> update the database and seed data (run after adding permissions or migrations)
-#   ./scripts/dev.sh frontend  -> run Angular on http://localhost:4200
+#   ./scripts/dev.sh public    -> run the public site (fresh.angular) on http://localhost:4201
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 APP="$ROOT/TastyBites"
 HOST="$APP/aspnet-core/src/TastyBites.HttpApi.Host"
 MIGRATOR="$APP/aspnet-core/src/TastyBites.DbMigrator"
-NG="$APP/angular"
+NG="$APP/fresh.angular"
 ADMIN_NG="$APP/admin.angular"
 
 DOTNET7_DIR="$HOME/.dotnet7"
@@ -88,7 +88,7 @@ setup() {
   (cd "$NG" && npm install --no-audit --no-fund)
   ok "angular deps installed"
 
-  printf "\n\033[32mSetup done.\033[0m Now open two terminals:\n  ./scripts/dev.sh backend\n  ./scripts/dev.sh frontend\nLogin: admin / 1q2w3E*\n"
+  printf "\n\033[32mSetup done.\033[0m Now open two terminals:\n  ./scripts/dev.sh backend\n  ./scripts/dev.sh admin\nLogin: admin / 1q2w3E*\n"
 }
 
 libs() {
@@ -124,9 +124,11 @@ proxy() {
   cd "$ADMIN_NG" && abp generate-proxy -t ng
 }
 
-frontend() {
+public() {
   use_node18
-  cd "$NG" && npx ng serve --open
+  cd "$NG"
+  [ -d node_modules ] || npm install --no-audit --no-fund
+  npx ng serve --open
 }
 
 case "${1:-}" in
@@ -136,6 +138,6 @@ case "${1:-}" in
   admin) admin ;;
   proxy) proxy ;;
   migrate) migrate ;;
-  frontend) frontend ;;
-  *) echo "usage: ./scripts/dev.sh {setup|libs|backend|admin|proxy|migrate|frontend}"; exit 1 ;;
+  public) public ;;
+  *) echo "usage: ./scripts/dev.sh {setup|libs|backend|admin|public|proxy|migrate}"; exit 1 ;;
 esac
