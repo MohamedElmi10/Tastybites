@@ -1,7 +1,9 @@
-.name-col {
-  width: 22%;
+// Let long descriptions wrap onto several lines instead of being cut off.
+// ::ng-deep is needed because the cells are rendered inside ngx-datatable's own component.
+:host ::ng-deep .recipes-table .datatable-body-cell-label {
+  white-space: normal;
 }
-.actions-col {
-  width: 1%;
-  white-space: nowrap;
+
+:host ::ng-deep .recipes-table.ngx-datatable.material {
+  box-shadow: none;
 }

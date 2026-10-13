@@ -14,4 +14,7 @@ export class RecipesListComponent {
   // An Observable is a stream that delivers the recipes once the API answers.
   // The `async` pipe in the template subscribes for us and unsubscribes when the page closes.
   readonly recipes$: Observable<RecipeDto[]> = this.recipeAdminService.getAllRecipes();
+
+  // Start sorted by name, A to Z. Clicking a column header changes it.
+  readonly defaultSort = [{ prop: 'name', dir: 'asc' }];
 }
