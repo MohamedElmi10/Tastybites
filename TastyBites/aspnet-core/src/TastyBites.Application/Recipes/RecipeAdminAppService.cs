@@ -6,10 +6,14 @@ using Volo.Abp.Domain.Repositories;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
+using TastyBites.Permissions;
 
 namespace TastyBites.Recipes
 {
-    public class RecipeAdminAppService : CrudAppService<Recipe, RecipeDto, int, PagedAndSortedResultRequestDto>, IRecipeAppService
+    // Admin only: every method needs at least the Recipes permission (must be logged in).
+    [Authorize(TastyBitesPermissions.Recipes.Default)]
+    public class RecipeAdminAppService : CrudAppService<Recipe, RecipeDto, int, PagedAndSortedResultRequestDto>, IRecipeAdminAppService
     {
         private readonly IRepository<Recipe, int> _recipesRepository;
 
@@ -29,6 +33,7 @@ namespace TastyBites.Recipes
         }
 
         //Create a new recipe ovverrid
+        [Authorize(TastyBitesPermissions.Recipes.Create)]
         public override async Task<RecipeDto> CreateAsync(RecipeDto input){
             var recipe = ObjectMapper.Map<RecipeDto, Recipe>(input);
             recipe.Name = recipe.Name.Trim();
@@ -39,6 +44,7 @@ namespace TastyBites.Recipes
         }
 
         //update recipe
+        [Authorize(TastyBitesPermissions.Recipes.Edit)]
         public override async Task<RecipeDto> UpdateAsync(int id, RecipeDto input){
             var recipe =  await _recipesRepository.GetAsync(id);
             //only the availabe values from the input DTO will be applied To the recipe entity
@@ -50,6 +56,7 @@ namespace TastyBites.Recipes
             return recipeDto;
         }
         //override the delete method
+        [Authorize(TastyBitesPermissions.Recipes.Delete)]
         public override async Task DeleteAsync (int id){
             await _recipesRepository.DeleteAsync(id);
         }

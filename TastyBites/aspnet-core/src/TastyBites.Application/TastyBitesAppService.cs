@@ -10,7 +10,7 @@ namespace TastyBites;
  */
 public abstract class TastyBitesAppService : ApplicationService
 {
-    protected TastyBitesAppService(Volo.Abp.Domain.Repositories.IRepository<Recipes.Recipe, int> repository)
+    protected TastyBitesAppService()
     {
         LocalizationResource = typeof(TastyBitesResource);
     }

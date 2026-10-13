@@ -5,6 +5,7 @@
 #   ./scripts/dev.sh backend   -> run the API on http://localhost:5001  (Swagger: /swagger)
 #   ./scripts/dev.sh admin     -> run the admin app (admin.angular) on http://localhost:4200
 #   ./scripts/dev.sh proxy     -> generate Angular API services from the running backend
+#   ./scripts/dev.sh migrate   -> update the database and seed data (run after adding permissions or migrations)
 #   ./scripts/dev.sh frontend  -> run Angular on http://localhost:4200
 set -euo pipefail
 
@@ -109,6 +110,12 @@ admin() {
   npx ng serve --open
 }
 
+migrate() {
+  # Applies new migrations and seeds data, e.g. grants new permissions to the admin role
+  use_dotnet7
+  (cd "$MIGRATOR" && dotnet run)
+}
+
 proxy() {
   # Reads the running API (localhost:5001) and generates typed Angular services into admin.angular/src/app/proxy
   use_dotnet7
@@ -128,6 +135,7 @@ case "${1:-}" in
   backend) backend ;;
   admin) admin ;;
   proxy) proxy ;;
+  migrate) migrate ;;
   frontend) frontend ;;
-  *) echo "usage: ./scripts/dev.sh {setup|libs|backend|admin|proxy|frontend}"; exit 1 ;;
+  *) echo "usage: ./scripts/dev.sh {setup|libs|backend|admin|proxy|migrate|frontend}"; exit 1 ;;
 esac

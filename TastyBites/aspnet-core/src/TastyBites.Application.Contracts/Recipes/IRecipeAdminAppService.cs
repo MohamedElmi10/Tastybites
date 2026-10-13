@@ -6,7 +6,7 @@ using Volo.Abp.Application.Services;
 
 namespace TastyBites.Recipes
 {
-    public interface IRecipeAppService : ICrudAppService<
+    public interface IRecipeAdminAppService : ICrudAppService<
     RecipeDto,
     int,
     PagedAndSortedResultRequestDto>
