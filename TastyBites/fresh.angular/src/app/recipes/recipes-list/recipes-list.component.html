@@ -1,0 +1,29 @@
+<section class="page-head">
+  <div class="site-wrap">
+    <h1>All recipes</h1>
+    <p>Everything in the kitchen, A to Z.</p>
+  </div>
+</section>
+
+<section class="block block-tight">
+  <div class="site-wrap">
+    <div class="tools">
+      <label class="search">
+        <i class="fas fa-search" aria-hidden="true"></i>
+        <input [(ngModel)]="search" placeholder="Search recipes…" aria-label="Search recipes" />
+      </label>
+      <span class="count" *ngIf="recipes">{{ filtered.length }} of {{ recipes.length }}</span>
+    </div>
+
+    <p class="muted" *ngIf="!recipes">Loading recipes…</p>
+
+    <div class="card-grid" *ngIf="recipes && filtered.length">
+      <app-recipe-card *ngFor="let recipe of filtered" [recipe]="recipe"></app-recipe-card>
+    </div>
+
+    <div class="empty" *ngIf="recipes && !filtered.length">
+      <ng-container *ngIf="search; else noneAtAll">No recipes match “{{ search }}”.</ng-container>
+      <ng-template #noneAtAll>No recipes yet. Check back soon.</ng-template>
+    </div>
+  </div>
+</section>

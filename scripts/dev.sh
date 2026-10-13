@@ -4,7 +4,7 @@
 #   ./scripts/dev.sh libs      -> download the login page styles into the API's wwwroot/libs
 #   ./scripts/dev.sh backend   -> run the API on http://localhost:5001  (Swagger: /swagger)
 #   ./scripts/dev.sh admin     -> run the admin app (admin.angular) on http://localhost:4200
-#   ./scripts/dev.sh proxy     -> generate Angular API services from the running backend
+#   ./scripts/dev.sh proxy [admin|public] -> generate Angular API services from the running backend
 #   ./scripts/dev.sh add-migration NAME -> create a database migration after changing an entity
 #   ./scripts/dev.sh migrate   -> update the database and seed data (run after adding permissions or migrations)
 #   ./scripts/dev.sh public    -> run the public site (fresh.angular) on http://localhost:4201
@@ -126,11 +126,16 @@ migrate() {
 }
 
 proxy() {
-  # Reads the running API (localhost:5001) and generates typed Angular services into admin.angular/src/app/proxy
+  # Reads the running API (localhost:5001) and generates typed Angular services into <app>/src/app/proxy
   use_dotnet7
   use_node18
   curl -sf http://localhost:5001/api/abp/api-definition >/dev/null || fail "Backend isn't running. Start it first: ./scripts/dev.sh backend"
-  cd "$ADMIN_NG" && abp generate-proxy -t ng
+  case "${1:-admin}" in
+    admin) cd "$ADMIN_NG" ;;
+    public) cd "$NG" ;;
+    *) fail "Use: ./scripts/dev.sh proxy [admin|public]" ;;
+  esac
+  abp generate-proxy -t ng
 }
 
 public() {
@@ -145,9 +150,9 @@ case "${1:-}" in
   libs) libs ;;
   backend) backend ;;
   admin) admin ;;
-  proxy) proxy ;;
+  proxy) shift; proxy "$@" ;;
   migrate) migrate ;;
   add-migration) shift; add_migration "$@" ;;
   public) public ;;
-  *) echo "usage: ./scripts/dev.sh {setup|libs|backend|admin|public|proxy|add-migration NAME|migrate}"; exit 1 ;;
+  *) echo "usage: ./scripts/dev.sh {setup|libs|backend|admin|public|proxy [admin|public]|add-migration NAME|migrate}"; exit 1 ;;
 esac
