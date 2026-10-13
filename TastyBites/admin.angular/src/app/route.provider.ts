@@ -19,6 +19,7 @@ function configureRoutes(routesService: RoutesService) {
         path: '/recipes/list',
         name: '::Menu:Recipes',
         iconClass: 'fas fa-utensils',
+        requiredPolicy: 'TastyBites.Recipes', // menu item hidden without the permission
         order: 2,
         layout: eLayoutType.application,
       },

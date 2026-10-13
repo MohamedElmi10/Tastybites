@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card-header d-flex justify-content-between align-items-center">
     <h5 class="card-title mb-0">{{ '::Recipes:List' | abpLocalization }}</h5>
-    <a class="btn btn-primary btn-sm" routerLink="/recipes/create">
+    <a class="btn btn-primary btn-sm" routerLink="/recipes/create" *abpPermission="'TastyBites.Recipes.Create'">
       <i class="fas fa-plus me-1"></i>{{ '::Recipes:Create' | abpLocalization }}
     </a>
   </div>
@@ -35,7 +35,7 @@
 
         <ngx-datatable-column name="" [sortable]="false" [width]="100" [maxWidth]="110">
           <ng-template let-row="row" ngx-datatable-cell-template>
-            <a class="btn btn-outline-primary btn-sm" [routerLink]="['/recipes/edit', row.id]">
+            <a class="btn btn-outline-primary btn-sm" [routerLink]="['/recipes/edit', row.id]" *abpPermission="'TastyBites.Recipes.Edit'">
               <i class="fas fa-pen me-1"></i>{{ '::Recipes:EditButton' | abpLocalization }}
             </a>
           </ng-template>

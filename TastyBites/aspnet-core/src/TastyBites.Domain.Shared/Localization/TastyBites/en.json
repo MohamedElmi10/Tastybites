@@ -17,6 +17,11 @@
     "Recipes:Cancel": "Cancel",
     "Recipes:Saved": "Recipe saved",
     "Recipes:SaveChanges": "Save changes",
-    "Recipes:EditButton": "Edit"
+    "Recipes:EditButton": "Edit",
+    "Permission:TastyBites": "TastyBites",
+    "Permission:Recipes": "Recipe management",
+    "Permission:Recipes.Create": "Create recipes",
+    "Permission:Recipes.Edit": "Edit recipes",
+    "Permission:Recipes.Delete": "Delete recipes"
   }
 }
