@@ -3,6 +3,7 @@
 #   ./scripts/dev.sh setup     -> install .NET 7, Node 18, MySQL 8.4, ABP CLI; create DB; restore; migrate
 #   ./scripts/dev.sh libs      -> download the login page styles into the API's wwwroot/libs
 #   ./scripts/dev.sh backend   -> run the API on http://localhost:5001  (Swagger: /swagger)
+#   ./scripts/dev.sh admin     -> run the admin app (admin.angular) on http://localhost:4200
 #   ./scripts/dev.sh frontend  -> run Angular on http://localhost:4200
 set -euo pipefail
 
@@ -11,6 +12,7 @@ APP="$ROOT/TastyBites"
 HOST="$APP/aspnet-core/src/TastyBites.HttpApi.Host"
 MIGRATOR="$APP/aspnet-core/src/TastyBites.DbMigrator"
 NG="$APP/angular"
+ADMIN_NG="$APP/admin.angular"
 
 DOTNET7_DIR="$HOME/.dotnet7"
 DB_NAME="tasty-bites"
@@ -99,6 +101,13 @@ backend() {
   cd "$HOST" && ASPNETCORE_ENVIRONMENT=Development dotnet run
 }
 
+admin() {
+  use_node18
+  cd "$ADMIN_NG"
+  [ -d node_modules ] || npm install --no-audit --no-fund
+  npx ng serve --open
+}
+
 frontend() {
   use_node18
   cd "$NG" && npx ng serve --open
@@ -108,6 +117,7 @@ case "${1:-}" in
   setup) setup ;;
   libs) libs ;;
   backend) backend ;;
+  admin) admin ;;
   frontend) frontend ;;
-  *) echo "usage: ./scripts/dev.sh {setup|libs|backend|frontend}"; exit 1 ;;
+  *) echo "usage: ./scripts/dev.sh {setup|libs|backend|admin|frontend}"; exit 1 ;;
 esac
