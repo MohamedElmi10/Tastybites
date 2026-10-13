@@ -15,6 +15,8 @@
     "Recipes:Empty": "No recipes yet. Create the first one.",
     "Recipes:Save": "Save",
     "Recipes:Cancel": "Cancel",
-    "Recipes:Saved": "Recipe saved"
+    "Recipes:Saved": "Recipe saved",
+    "Recipes:SaveChanges": "Save changes",
+    "Recipes:EditButton": "Edit"
   }
 }

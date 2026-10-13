@@ -13,12 +13,18 @@
           <tr>
             <th class="name-col">{{ '::Recipes:Name' | abpLocalization }}</th>
             <th>{{ '::Recipes:Description' | abpLocalization }}</th>
+            <th class="actions-col"></th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let recipe of recipes">
             <td class="fw-semibold">{{ recipe.name }}</td>
             <td class="text-muted">{{ recipe.description }}</td>
+            <td class="text-end">
+              <a class="btn btn-outline-primary btn-sm" [routerLink]="['/recipes/edit', recipe.id]">
+                <i class="fas fa-pen me-1"></i>{{ '::Recipes:EditButton' | abpLocalization }}
+              </a>
+            </td>
           </tr>
         </tbody>
       </table>
