@@ -1,3 +1,45 @@
-<h1>{{ '::Recipes:Create' | abpLocalization }}</h1>
-<p>The recipe form comes here (Part 5).</p>
-<a routerLink="/recipes/list">{{ '::Recipes:BackToList' | abpLocalization }}</a>
+<div class="card recipe-form">
+  <div class="card-header">
+    <h5 class="card-title mb-0">{{ '::Recipes:Create' | abpLocalization }}</h5>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="save()" novalidate>
+    <div class="card-body">
+      <div class="mb-3">
+        <label class="form-label" for="recipe-name">{{ '::Recipes:Name' | abpLocalization }} *</label>
+        <input
+          id="recipe-name"
+          type="text"
+          class="form-control"
+          formControlName="name"
+          [maxlength]="nameMaxLength"
+          autofocus
+        />
+      </div>
+
+      <div class="mb-1">
+        <label class="form-label" for="recipe-description">{{ '::Recipes:Description' | abpLocalization }} *</label>
+        <textarea
+          id="recipe-description"
+          class="form-control"
+          rows="5"
+          formControlName="description"
+          [maxlength]="descriptionMaxLength"
+        ></textarea>
+      </div>
+      <small class="text-muted">
+        {{ form.controls.description.value.length }} / {{ descriptionMaxLength }}
+      </small>
+    </div>
+
+    <div class="card-footer d-flex justify-content-end gap-2">
+      <a class="btn btn-outline-secondary" routerLink="/recipes/list">
+        {{ '::Recipes:Cancel' | abpLocalization }}
+      </a>
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid || saving">
+        <i class="fas me-1" [class.fa-save]="!saving" [class.fa-spinner]="saving" [class.fa-spin]="saving"></i>
+        {{ '::Recipes:Save' | abpLocalization }}
+      </button>
+    </div>
+  </form>
+</div>
