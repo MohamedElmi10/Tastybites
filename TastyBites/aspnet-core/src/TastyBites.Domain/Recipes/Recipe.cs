@@ -14,6 +14,8 @@ namespace TastyBites.Recipes
     {
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
-    
-}
+
+        // Link to a photo of the dish. Optional: recipes without one show a placeholder.
+        public string? ImageUrl { get; set; }
+    }
 }

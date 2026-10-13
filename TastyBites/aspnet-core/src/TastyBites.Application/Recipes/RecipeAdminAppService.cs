@@ -38,6 +38,7 @@ namespace TastyBites.Recipes
             var recipe = ObjectMapper.Map<RecipeDto, Recipe>(input);
             recipe.Name = recipe.Name.Trim();
             recipe.Description = recipe.Description.Trim();
+            recipe.ImageUrl = recipe.ImageUrl?.Trim();
             await _recipesRepository.InsertAsync(recipe, autoSave: true);
             var recipeDto = ObjectMapper.Map<Recipe, RecipeDto>(recipe);
             return recipeDto;

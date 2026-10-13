@@ -91,7 +91,7 @@ public class TastyBitesDbContext :
         {
            b.ToTable(TastyBitesConsts.DbTablePrefix + "Recipes", TastyBitesConsts.DbSchema);
            b.ConfigureByConvention(); //auto configure for the base class props
-           //...
+           b.Property(r => r.ImageUrl).HasMaxLength(RecipeConsts.ImageUrlMaxLength); // nullable varchar(512)
         });
     }
 }
