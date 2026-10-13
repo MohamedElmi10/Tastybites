@@ -77,6 +77,14 @@ namespace TastyBites.Recipes
             );
             return ObjectMapper.Map<List<Recipe>, List<RecipeDto>>(recipes);
         }
+
+        // All recipes in one call (no paging), sorted by name. Used by the admin recipes list.
+        public async Task<List<RecipeDto>> GetAllRecipesAsync()
+        {
+            var queryable = await _recipesRepository.GetQueryableAsync();
+            var recipes = await AsyncExecuter.ToListAsync(queryable.OrderBy(r => r.Name));
+            return ObjectMapper.Map<List<Recipe>, List<RecipeDto>>(recipes);
+        }
     
     }
 }
