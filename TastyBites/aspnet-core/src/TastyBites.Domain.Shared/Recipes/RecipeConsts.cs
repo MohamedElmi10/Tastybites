@@ -5,5 +5,6 @@ namespace TastyBites.Recipes
     {
         public const int NameMaxLength = 128;
         public const int DescriptionMaxLength = 1000;
+        public const int ImageUrlMaxLength = 512;
     }
 }

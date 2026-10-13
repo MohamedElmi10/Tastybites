@@ -5,6 +5,7 @@
 #   ./scripts/dev.sh backend   -> run the API on http://localhost:5001  (Swagger: /swagger)
 #   ./scripts/dev.sh admin     -> run the admin app (admin.angular) on http://localhost:4200
 #   ./scripts/dev.sh proxy     -> generate Angular API services from the running backend
+#   ./scripts/dev.sh add-migration NAME -> create a database migration after changing an entity
 #   ./scripts/dev.sh migrate   -> update the database and seed data (run after adding permissions or migrations)
 #   ./scripts/dev.sh public    -> run the public site (fresh.angular) on http://localhost:4201
 set -euo pipefail
@@ -110,6 +111,14 @@ admin() {
   npx ng serve --open
 }
 
+add_migration() {
+  # Creates an EF Core migration from model changes: ./scripts/dev.sh add-migration AddRecipeImageUrl
+  [ -n "${1:-}" ] || fail "Give the migration a name, e.g. ./scripts/dev.sh add-migration AddRecipeImageUrl"
+  use_dotnet7
+  dotnet ef --version 2>/dev/null | grep -q '^7\.' || dotnet tool update -g dotnet-ef --version 7.0.20
+  (cd "$APP/aspnet-core/src/TastyBites.EntityFrameworkCore" && dotnet ef migrations add "$1")
+}
+
 migrate() {
   # Applies new migrations and seeds data, e.g. grants new permissions to the admin role
   use_dotnet7
@@ -138,6 +147,7 @@ case "${1:-}" in
   admin) admin ;;
   proxy) proxy ;;
   migrate) migrate ;;
+  add-migration) shift; add_migration "$@" ;;
   public) public ;;
-  *) echo "usage: ./scripts/dev.sh {setup|libs|backend|admin|public|proxy|migrate}"; exit 1 ;;
+  *) echo "usage: ./scripts/dev.sh {setup|libs|backend|admin|public|proxy|add-migration NAME|migrate}"; exit 1 ;;
 esac

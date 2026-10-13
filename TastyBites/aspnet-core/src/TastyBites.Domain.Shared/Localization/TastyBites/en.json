@@ -22,6 +22,9 @@
     "Permission:Recipes": "Recipe management",
     "Permission:Recipes.Create": "Create recipes",
     "Permission:Recipes.Edit": "Edit recipes",
-    "Permission:Recipes.Delete": "Delete recipes"
+    "Permission:Recipes.Delete": "Delete recipes",
+    "Recipes:ImageUrl": "Image URL (optional)",
+    "Recipes:ImageUrlHint": "Paste a link to a photo you have the right to use, e.g. your own or from Unsplash/Pexels.",
+    "Recipes:ImageLoadFailed": "This image couldn't be loaded. Check the link."
   }
 }
