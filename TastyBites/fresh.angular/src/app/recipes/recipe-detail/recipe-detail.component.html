@@ -1,0 +1,40 @@
+<ng-container *ngIf="state$ | async as state; else loading">
+  <ng-container *ngIf="state.recipe as recipe; else notFound">
+    <section class="detail">
+      <div class="site-wrap detail-row">
+        <div>
+          <a class="back" routerLink="/recipes">← All recipes</a>
+          <h1>{{ recipe.name }}</h1>
+          <p class="desc">{{ recipe.description }}</p>
+        </div>
+        <app-recipe-photo [url]="recipe.imageUrl" [name]="recipe.name ?? ''"></app-recipe-photo>
+      </div>
+    </section>
+
+    <section class="block" *ngIf="others$ | async as others">
+      <div class="site-wrap" *ngIf="others.length">
+        <div class="block-head">
+          <h2>More to cook</h2>
+          <a routerLink="/recipes">See all →</a>
+        </div>
+        <div class="card-grid">
+          <app-recipe-card *ngFor="let other of others" [recipe]="other"></app-recipe-card>
+        </div>
+      </div>
+    </section>
+  </ng-container>
+</ng-container>
+
+<ng-template #loading>
+  <div class="site-wrap"><p class="muted loading">Loading recipe…</p></div>
+</ng-template>
+
+<ng-template #notFound>
+  <section class="page-head">
+    <div class="site-wrap">
+      <h1>Recipe not found</h1>
+      <p>It may have been removed, or the link is wrong.</p>
+      <p><a class="tb-btn tb-btn-primary" routerLink="/recipes">Browse all recipes</a></p>
+    </div>
+  </section>
+</ng-template>
