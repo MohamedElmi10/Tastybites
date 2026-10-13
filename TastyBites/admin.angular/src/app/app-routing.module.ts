@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PermissionGuard } from '@abp/ng.core';
 
 const routes: Routes = [
   {
@@ -10,6 +11,9 @@ const routes: Routes = [
   {
     path: 'recipes',
     loadChildren: () => import('./recipes/recipes.module').then(m => m.RecipesModule),
+    // Only users with the Recipes permission may open these pages (others get the 403 page)
+    canActivate: [PermissionGuard],
+    data: { requiredPolicy: 'TastyBites.Recipes' },
   },
   {
     path: 'account',
