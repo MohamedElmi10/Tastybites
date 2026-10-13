@@ -15,6 +15,13 @@ function configureRoutes(routesService: RoutesService) {
         order: 1,
         layout: eLayoutType.application,
       },
+      {
+        path: '/recipes/list',
+        name: '::Menu:Recipes',
+        iconClass: 'fas fa-utensils',
+        order: 2,
+        layout: eLayoutType.application,
+      },
     ]);
   };
 }
