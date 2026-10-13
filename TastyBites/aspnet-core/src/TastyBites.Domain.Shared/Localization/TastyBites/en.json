@@ -12,6 +12,9 @@
     "Recipes:Name": "Name",
     "Recipes:Description": "Description",
     "Recipes:Loading": "Loading recipes…",
-    "Recipes:Empty": "No recipes yet. Create the first one."
+    "Recipes:Empty": "No recipes yet. Create the first one.",
+    "Recipes:Save": "Save",
+    "Recipes:Cancel": "Cancel",
+    "Recipes:Saved": "Recipe saved"
   }
 }
