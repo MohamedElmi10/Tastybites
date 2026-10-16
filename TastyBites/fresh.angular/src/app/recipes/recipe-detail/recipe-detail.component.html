@@ -11,6 +11,32 @@
       </div>
     </section>
 
+    <!-- Hidden for older recipes that have neither list yet -->
+    <section class="block block-tight" *ngIf="recipe.ingredients.length || recipe.steps.length">
+      <div class="site-wrap cook-grid">
+        <aside class="ingredients" *ngIf="recipe.ingredients.length">
+          <h2>Ingredients</h2>
+          <!-- why: role="list" because Safari drops list semantics when list-style is none -->
+          <ul role="list">
+            <li *ngFor="let ingredient of recipe.ingredients">
+              <!-- Left out for e.g. "salt", so the name sits flush left -->
+              <span class="qty" *ngIf="ingredient.amount != null || ingredient.unit">
+                {{ ingredient.amount }} {{ ingredient.unit }}
+              </span>
+              <span>{{ ingredient.name }}</span>
+            </li>
+          </ul>
+        </aside>
+
+        <div class="steps" *ngIf="recipe.steps.length">
+          <h2>Steps</h2>
+          <ol role="list">
+            <li *ngFor="let step of recipe.steps">{{ step.text }}</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
     <section class="block" *ngIf="others$ | async as others">
       <div class="site-wrap" *ngIf="others.length">
         <div class="block-head">
