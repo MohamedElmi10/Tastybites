@@ -14,5 +14,6 @@ namespace TastyBites.Recipes
         // Create Read(Single, list) Update, Delete
         Task<List<RecipeDto>> GetRecentAsync(int count = 3);
         Task<List<RecipeDto>> GetAllRecipesAsync();
+        Task<RecipeStatsDto> GetStatsAsync();
     }
 }

@@ -14,6 +14,12 @@ export interface RecipeIngredientDto {
   unit?: string;
 }
 
+export interface RecipeStatsDto {
+  totalRecipes: number;
+  withoutPhoto: number;
+  withoutIngredientsOrSteps: number;
+}
+
 export interface RecipeStepDto {
   text: string;
 }

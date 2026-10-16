@@ -1,4 +1,4 @@
-import type { RecipeDto } from './models';
+import type { RecipeDto, RecipeStatsDto } from './models';
 import { RestService, Rest } from '@abp/ng.core';
 import type { PagedAndSortedResultRequestDto, PagedResultDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
@@ -57,6 +57,14 @@ export class RecipeAdminService {
       method: 'GET',
       url: '/api/app/recipe-admin/recent',
       params: { count },
+    },
+    { apiName: this.apiName,...config });
+  
+
+  getStats = (config?: Partial<Rest.Config>) =>
+    this.restService.request<any, RecipeStatsDto>({
+      method: 'GET',
+      url: '/api/app/recipe-admin/stats',
     },
     { apiName: this.apiName,...config });
   
