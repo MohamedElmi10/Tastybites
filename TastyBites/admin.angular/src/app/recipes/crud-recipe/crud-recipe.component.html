@@ -49,7 +49,7 @@
 
         <!-- Live preview so the admin sees the photo before saving -->
         <div class="image-preview mt-2" *ngIf="previewUrl as url">
-          <img *ngIf="!previewFailed" [src]="url" alt="" (error)="previewFailed = true" />
+          <img *ngIf="!previewFailed" [src]="url | imageSrc" alt="" (error)="previewFailed = true" />
           <p *ngIf="previewFailed" class="text-danger small mb-0">
             {{ '::Recipes:ImageLoadFailed' | abpLocalization }}
           </p>

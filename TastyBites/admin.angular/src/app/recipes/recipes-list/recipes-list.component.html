@@ -23,7 +23,7 @@
 
         <ngx-datatable-column name="" prop="imageUrl" [sortable]="false" [width]="80" [maxWidth]="90">
           <ng-template let-value="value" ngx-datatable-cell-template>
-            <img *ngIf="value; else noImage" class="thumb" [src]="value" alt="" />
+            <img *ngIf="value; else noImage" class="thumb" [src]="value | imageSrc" alt="" />
             <ng-template #noImage><span class="thumb thumb-empty"><i class="fas fa-utensils"></i></span></ng-template>
           </ng-template>
         </ngx-datatable-column>

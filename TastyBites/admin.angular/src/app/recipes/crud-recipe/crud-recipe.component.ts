@@ -52,8 +52,12 @@ export class CrudRecipeComponent implements OnInit {
   readonly form = this.fb.nonNullable.group({
     name: ['', [Validators.required, Validators.maxLength(NAME_MAX_LENGTH)]],
     description: ['', [Validators.required, Validators.maxLength(DESCRIPTION_MAX_LENGTH)]],
-    // Optional photo link; must start with http:// or https:// when filled in
-    imageUrl: ['', [Validators.maxLength(IMAGE_URL_MAX_LENGTH), Validators.pattern(/^https?:\/\/\S+$/i)]],
+    // Optional photo: a full http(s) link, or /images/recipes/<file> for a photo hosted by our API.
+    // Same rule as RecipeConsts.ImageUrlPattern on the backend.
+    imageUrl: [
+      '',
+      [Validators.maxLength(IMAGE_URL_MAX_LENGTH), Validators.pattern(/^(https?:\/\/\S+|\/images\/recipes\/[\w.-]+)$/i)],
+    ],
     // why: FormArray = a list of controls whose length changes at runtime.
     // The whole form is only valid when every row is valid.
     ingredients: this.fb.array<IngredientForm>([]),

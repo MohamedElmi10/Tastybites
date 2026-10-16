@@ -15,8 +15,8 @@ namespace TastyBites.Recipes
         [StringLength(RecipeConsts.DescriptionMaxLength)]
         public string Description { get; set; } = string.Empty;
 
-        // Optional. Must be a full http(s) address when given.
-        [Url]
+        // Optional. A full http(s) address, or /images/recipes/<file> for a self-hosted photo.
+        [RegularExpression(RecipeConsts.ImageUrlPattern)]
         [StringLength(RecipeConsts.ImageUrlMaxLength)]
         public string? ImageUrl { get; set; }
 
