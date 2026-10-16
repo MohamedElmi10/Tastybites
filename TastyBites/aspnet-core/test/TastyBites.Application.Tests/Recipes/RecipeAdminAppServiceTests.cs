@@ -20,9 +20,9 @@ public class RecipeAdminAppServiceTests : TastyBitesApplicationTestBase
     {
         var stats = await _recipeAdminAppService.GetStatsAsync();
 
-        stats.TotalRecipes.ShouldBe(15);
-        stats.WithoutPhoto.ShouldBe(1);               // İskender Kebab has no photo in the seed data
-        stats.WithoutIngredientsOrSteps.ShouldBe(0);  // every seeded recipe has both lists
+        stats.TotalRecipes.ShouldBe(12);
+        stats.WithoutPhoto.ShouldBe(0);               // every seeded recipe has a photo
+        stats.WithoutIngredientsOrSteps.ShouldBe(0);  // and both lists
     }
 
     [Fact]
@@ -32,8 +32,8 @@ public class RecipeAdminAppServiceTests : TastyBitesApplicationTestBase
 
         var stats = await _recipeAdminAppService.GetStatsAsync();
 
-        stats.TotalRecipes.ShouldBe(16);
-        stats.WithoutPhoto.ShouldBe(2);
+        stats.TotalRecipes.ShouldBe(13);
+        stats.WithoutPhoto.ShouldBe(1);
         stats.WithoutIngredientsOrSteps.ShouldBe(1);
     }
 }
