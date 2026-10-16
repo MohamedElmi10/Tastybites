@@ -1,0 +1,43 @@
+.recipe-form {
+  max-width: 720px;
+}
+
+.image-preview img {
+  width: 240px;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--bs-border-color, #dee2e6);
+}
+
+// One row in the ingredients or steps list: fields grow, buttons stay their size
+.list-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.list-row .row-buttons {
+  flex-shrink: 0;
+}
+
+// why: amount and unit are short values; fixed widths keep the columns lined up across rows
+.ingredient-row .amount {
+  width: 90px;
+  flex-shrink: 0;
+}
+
+.ingredient-row .unit {
+  width: 80px;
+  flex-shrink: 0;
+}
+
+.step-number {
+  width: 1.75rem;
+  flex-shrink: 0;
+  padding-top: 0.3rem;
+  text-align: right;
+  font-weight: 600;
+  color: var(--bs-secondary-color, #6c757d);
+}

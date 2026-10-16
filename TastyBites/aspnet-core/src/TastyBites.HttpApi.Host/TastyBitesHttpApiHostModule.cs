@@ -5,9 +5,12 @@ using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using OpenIddict.Server;
 using TastyBites.EntityFrameworkCore;
 using TastyBites.MultiTenancy;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
@@ -19,6 +22,7 @@ using Volo.Abp.Account;
 using Volo.Abp.Account.Web;
 using Volo.Abp.AspNetCore.MultiTenancy;
 using Volo.Abp.AspNetCore.Mvc;
+using Volo.Abp.AspNetCore.Mvc.AntiForgery;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Serilog;
@@ -46,6 +50,15 @@ public class TastyBitesHttpApiHostModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {
+        // why: the key signs every login token, so it must never be in git. Locally it comes from
+        // appsettings.secrets.json (gitignored), on a server from the env var OpenIddict__SigningKey.
+        var signingKey = context.Services.GetConfiguration()["OpenIddict:SigningKey"];
+        if (string.IsNullOrWhiteSpace(signingKey))
+        {
+            throw new InvalidOperationException(
+                "OpenIddict:SigningKey is missing. Copy appsettings.secrets.example.json to appsettings.secrets.json and fill it in.");
+        }
+
         PreConfigure<OpenIddictBuilder>(builder =>
         {
             builder.AddValidation(options =>
@@ -53,6 +66,32 @@ public class TastyBitesHttpApiHostModule : AbpModule
                 options.AddAudiences("TastyBites");
                 options.UseLocalServer();
                 options.UseAspNetCore();
+            });
+            
+            // Override the server configuration to avoid macOS keychain issues
+            builder.AddServer(options =>
+            {
+                options.AllowClientCredentialsFlow();
+                options.AllowAuthorizationCodeFlow();
+                options.AllowRefreshTokenFlow();
+                
+                options.SetIssuer(new Uri("http://localhost:5001"));
+                
+                // Use symmetric keys instead of certificates
+                var key = new SymmetricSecurityKey(Convert.FromBase64String(signingKey));
+                options.AddEncryptionKey(key);
+                options.AddSigningKey(key);
+                
+                var aspNetCore = options.UseAspNetCore()
+                       .EnableTokenEndpointPassthrough()
+                       .EnableAuthorizationEndpointPassthrough()
+                       .EnableUserinfoEndpointPassthrough();
+
+                // Local dev runs over plain http (localhost:5001), so allow non-HTTPS requests in Development only
+                if (context.Services.GetHostingEnvironment().IsDevelopment())
+                {
+                    aspNetCore.DisableTransportSecurityRequirement();
+                }
             });
         });
     }
@@ -69,6 +108,18 @@ public class TastyBitesHttpApiHostModule : AbpModule
         ConfigureVirtualFileSystem(context);
         ConfigureCors(context, configuration);
         ConfigureSwaggerServices(context, configuration);
+        ConfigureAntiForgery();
+    }
+
+    private void ConfigureAntiForgery()
+    {
+        // why: ABP's default XSRF-TOKEN cookie is SameSite=None, which Chrome only accepts over HTTPS.
+        // On http://localhost the browser drops it, so Swagger can't send the antiforgery header -> every POST/PUT is 400.
+        // Lax = "only send to this same site", which is all we need (Swagger and the API share localhost:5001).
+        Configure<AbpAntiForgeryOptions>(options =>
+        {
+            options.TokenCookie.SameSite = SameSiteMode.Lax;
+        });
     }
 
     private void ConfigureAuthentication(ServiceConfigurationContext context)

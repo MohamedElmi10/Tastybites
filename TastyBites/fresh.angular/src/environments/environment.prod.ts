@@ -1,0 +1,29 @@
+import { Environment } from '@abp/ng.core';
+
+const baseUrl = 'http://localhost:4200';
+
+// true only in environment.static.ts (the backend-less demo build)
+export const staticDemo = false;
+
+export const environment = {
+  production: true,
+  application: {
+    baseUrl,
+    name: 'TastyBites',
+    logoUrl: '',
+  },
+  oAuthConfig: {
+    issuer: 'https://localhost:44399/',
+    redirectUri: baseUrl,
+    clientId: 'TastyBites_App',
+    responseType: 'code',
+    scope: 'offline_access TastyBites',
+    requireHttps: true
+  },
+  apis: {
+    default: {
+      url: 'https://localhost:44399',
+      rootNamespace: 'TastyBites',
+    },
+  },
+} as Environment;

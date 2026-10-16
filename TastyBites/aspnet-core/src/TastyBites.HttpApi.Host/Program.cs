@@ -32,14 +32,15 @@ public class Program
             var builder = WebApplication.CreateBuilder(args);
             builder.WebHost.ConfigureKestrel(options =>
 {
-    options.ListenAnyIP(5000); // HTTP fallback
-    options.ListenAnyIP(5001, listenOptions =>
-    {
-        listenOptions.UseHttps(
-            "/Users/mohamedelmi/.aspnet/https/tastybites.pfx",
-            "SuperSecurePass123"
-        );
-    });
+    options.ListenAnyIP(5001); // HTTP on port 5001
+    // Temporarily disabled HTTPS due to certificate issues
+    // options.ListenAnyIP(5001, listenOptions =>
+    // {
+    //     listenOptions.UseHttps(
+    //         "/Users/mohamedelmi/.aspnet/https/tastybites.pfx",
+    //         "SuperSecurePass123"
+    //     );
+    // });
 });
             builder.Host.AddAppSettingsSecretsJson()
                 .UseAutofac()

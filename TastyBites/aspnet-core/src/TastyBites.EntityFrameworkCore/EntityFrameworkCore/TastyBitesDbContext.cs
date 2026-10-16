@@ -12,6 +12,8 @@ using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
+using TastyBites.Recipes;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 
 namespace TastyBites.EntityFrameworkCore;
 
@@ -51,6 +53,9 @@ public class TastyBitesDbContext :
     public DbSet<Tenant> Tenants { get; set; }
     public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
 
+    // TastyBites
+    public DbSet<Recipe> Recipes { get; set; }
+
     #endregion
 
     public TastyBitesDbContext(DbContextOptions<TastyBitesDbContext> options)
@@ -82,5 +87,31 @@ public class TastyBitesDbContext :
         //    b.ConfigureByConvention(); //auto configure for the base class props
         //    //...
         //});
+         builder.Entity<Recipe>(b =>
+        {
+           b.ToTable(TastyBitesConsts.DbTablePrefix + "Recipes", TastyBitesConsts.DbSchema);
+           b.ConfigureByConvention(); //auto configure for the base class props
+           b.Property(r => r.ImageUrl).HasMaxLength(RecipeConsts.ImageUrlMaxLength); // nullable varchar(512)
+
+           // One-to-many. Cascade: deleting a recipe deletes its ingredients and steps too.
+           b.HasMany(r => r.Ingredients).WithOne().HasForeignKey(i => i.RecipeId).OnDelete(DeleteBehavior.Cascade);
+           b.HasMany(r => r.Steps).WithOne().HasForeignKey(st => st.RecipeId).OnDelete(DeleteBehavior.Cascade);
+        });
+
+        builder.Entity<RecipeIngredient>(b =>
+        {
+           b.ToTable(TastyBitesConsts.DbTablePrefix + "RecipeIngredients", TastyBitesConsts.DbSchema);
+           b.ConfigureByConvention();
+           b.Property(i => i.Name).IsRequired().HasMaxLength(RecipeConsts.IngredientNameMaxLength);
+           b.Property(i => i.Unit).HasMaxLength(RecipeConsts.IngredientUnitMaxLength);
+           b.Property(i => i.Amount).HasPrecision(10, 2); // e.g. 1234.50
+        });
+
+        builder.Entity<RecipeStep>(b =>
+        {
+           b.ToTable(TastyBitesConsts.DbTablePrefix + "RecipeSteps", TastyBitesConsts.DbSchema);
+           b.ConfigureByConvention();
+           b.Property(st => st.Text).IsRequired().HasMaxLength(RecipeConsts.StepTextMaxLength);
+        });
     }
 }

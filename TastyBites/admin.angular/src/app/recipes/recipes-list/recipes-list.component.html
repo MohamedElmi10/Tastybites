@@ -1,0 +1,60 @@
+<div class="card">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h5 class="card-title mb-0">{{ '::Recipes:List' | abpLocalization }}</h5>
+    <a class="btn btn-primary btn-sm" routerLink="/recipes/create" *abpPermission="'TastyBites.Recipes.Create'">
+      <i class="fas fa-plus me-1"></i>{{ '::Recipes:Create' | abpLocalization }}
+    </a>
+  </div>
+
+  <div class="card-body p-0">
+    <ng-container *ngIf="recipes$ | async as recipes; else loading">
+      <!-- ngx-datatable: ABP's table component. Sorting happens in the browser, no extra API calls. -->
+      <ngx-datatable
+        *ngIf="recipes.length; else empty"
+        class="material recipes-table"
+        [rows]="recipes"
+        columnMode="force"
+        [headerHeight]="48"
+        [footerHeight]="0"
+        rowHeight="auto"
+        [sorts]="defaultSort"
+      >
+        <ngx-datatable-column name="ID" prop="id" [width]="70" [maxWidth]="90"></ngx-datatable-column>
+
+        <ngx-datatable-column name="" prop="imageUrl" [sortable]="false" [width]="80" [maxWidth]="90">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            <img *ngIf="value; else noImage" class="thumb" [src]="value | imageSrc" alt="" />
+            <ng-template #noImage><span class="thumb thumb-empty"><i class="fas fa-utensils"></i></span></ng-template>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column [name]="'::Recipes:Name' | abpLocalization" prop="name" [width]="200">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            <span class="fw-semibold">{{ value }}</span>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column [name]="'::Recipes:Description' | abpLocalization" prop="description" [width]="500">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            <span class="text-muted">{{ value }}</span>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="" [sortable]="false" [width]="100" [maxWidth]="110">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <a class="btn btn-outline-primary btn-sm" [routerLink]="['/recipes/edit', row.id]" *abpPermission="'TastyBites.Recipes.Edit'">
+              <i class="fas fa-pen me-1"></i>{{ '::Recipes:EditButton' | abpLocalization }}
+            </a>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </ng-container>
+
+    <ng-template #loading>
+      <p class="p-3 mb-0 text-muted">{{ '::Recipes:Loading' | abpLocalization }}</p>
+    </ng-template>
+    <ng-template #empty>
+      <p class="p-3 mb-0 text-muted">{{ '::Recipes:Empty' | abpLocalization }}</p>
+    </ng-template>
+  </div>
+</div>

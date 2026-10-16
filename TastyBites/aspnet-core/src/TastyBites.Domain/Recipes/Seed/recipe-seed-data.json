@@ -1,0 +1,732 @@
+[
+  {
+    "name": "Pasta",
+    "description": "Pasta is a classic Italian dish made from wheat flour dough, shaped into various forms, and typically served with sauces like marinara, Alfredo, or pesto.",
+    "imageUrl": "/images/recipes/pasta.jpg",
+    "ingredients": [
+      {
+        "name": "spaghetti or penne",
+        "amount": 400.0,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": 3.0,
+        "unit": "tbsp"
+      },
+      {
+        "name": "garlic, sliced",
+        "amount": 3.0,
+        "unit": "cloves"
+      },
+      {
+        "name": "canned whole tomatoes",
+        "amount": 800.0,
+        "unit": "g"
+      },
+      {
+        "name": "chilli flakes",
+        "amount": 1.0,
+        "unit": "pinch"
+      },
+      {
+        "name": "fresh basil",
+        "amount": 1.0,
+        "unit": "bunch"
+      },
+      {
+        "name": "salt",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "parmesan, grated",
+        "amount": 50.0,
+        "unit": "g"
+      }
+    ],
+    "steps": [
+      "Warm the olive oil in a pan and cook the garlic gently for 1–2 minutes without letting it brown.",
+      "Add the tomatoes and chilli, crush the tomatoes with a spoon and simmer for 15–20 minutes. Season with salt.",
+      "Cook the pasta in plenty of salted water until al dente. Save a cup of the cooking water.",
+      "Toss the pasta with the sauce and a splash of the cooking water until glossy.",
+      "Tear in the basil and serve with grated parmesan."
+    ]
+  },
+  {
+    "name": "Hummus",
+    "description": "Hummus is a traditional Middle Eastern dip made from blended chickpeas, tahini, lemon juice, and garlic, often served with olive oil. Creamy and flavorful, it is typically enjoyed with pita bread or vegetables.",
+    "imageUrl": "/images/recipes/hummus.jpg",
+    "ingredients": [
+      {
+        "name": "cooked chickpeas, drained (save the liquid)",
+        "amount": 400.0,
+        "unit": "g"
+      },
+      {
+        "name": "tahini",
+        "amount": 0.75,
+        "unit": "dl"
+      },
+      {
+        "name": "lemon, juiced",
+        "amount": 1.0,
+        "unit": null
+      },
+      {
+        "name": "garlic",
+        "amount": 1.0,
+        "unit": "clove"
+      },
+      {
+        "name": "ground cumin",
+        "amount": 0.5,
+        "unit": "tsp"
+      },
+      {
+        "name": "olive oil, plus extra to serve",
+        "amount": 3.0,
+        "unit": "tbsp"
+      },
+      {
+        "name": "salt",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "paprika powder, to serve",
+        "amount": null,
+        "unit": null
+      }
+    ],
+    "steps": [
+      "Blend the tahini and lemon juice for one minute until thick and pale.",
+      "Add the garlic, cumin, olive oil and a pinch of salt and blend again.",
+      "Add the chickpeas and blend for 2–3 minutes, adding a few spoons of the chickpea liquid until the hummus is completely smooth.",
+      "Taste and adjust with salt or lemon.",
+      "Spread it in a bowl, drizzle with olive oil and dust with paprika. Serve with warm bread."
+    ]
+  },
+  {
+    "name": "Pizza Margherita",
+    "description": "Pizza Margherita is a classic Italian dish made with a simple topping of tomatoes, fresh mozzarella, and basil on a thin crust, often baked in a wood-fired oven.",
+    "imageUrl": "/images/recipes/pizza-margherita.jpg",
+    "ingredients": [
+      {
+        "name": "pizza flour (tipo 00)",
+        "amount": 500.0,
+        "unit": "g"
+      },
+      {
+        "name": "lukewarm water",
+        "amount": 3.2,
+        "unit": "dl"
+      },
+      {
+        "name": "dried yeast",
+        "amount": 5.0,
+        "unit": "g"
+      },
+      {
+        "name": "salt",
+        "amount": 10.0,
+        "unit": "g"
+      },
+      {
+        "name": "canned San Marzano tomatoes",
+        "amount": 400.0,
+        "unit": "g"
+      },
+      {
+        "name": "fresh mozzarella",
+        "amount": 250.0,
+        "unit": "g"
+      },
+      {
+        "name": "fresh basil leaves",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "olive oil",
+        "amount": null,
+        "unit": null
+      }
+    ],
+    "steps": [
+      "Stir the yeast into the water, then mix in the flour and salt. Knead for 10 minutes until smooth and elastic.",
+      "Cover and let the dough rise for 2 hours, or for 24 hours in the fridge for more flavour.",
+      "Divide the dough into 4 balls and let them rest for 30 minutes. Heat the oven as hot as it goes, ideally with a pizza stone inside.",
+      "Crush the tomatoes by hand with a pinch of salt. Tear the mozzarella and let it drain.",
+      "Stretch each ball into a thin round, spread over a thin layer of tomato and add the mozzarella.",
+      "Bake for 6–10 minutes until the crust is puffed and charred in spots.",
+      "Finish with basil and a drizzle of olive oil."
+    ]
+  },
+  {
+    "name": "Tacos",
+    "description": "Tacos are a traditional Mexican dish consisting of small, hand-sized tortillas filled with a variety of ingredients such as seasoned meat, vegetables, and salsa, often topped with cheese, guacamole, and sour cream.",
+    "imageUrl": "/images/recipes/tacos.jpg",
+    "ingredients": [
+      {
+        "name": "minced beef",
+        "amount": 500.0,
+        "unit": "g"
+      },
+      {
+        "name": "onion, finely chopped",
+        "amount": 1.0,
+        "unit": null
+      },
+      {
+        "name": "garlic, chopped",
+        "amount": 2.0,
+        "unit": "cloves"
+      },
+      {
+        "name": "ground cumin",
+        "amount": 2.0,
+        "unit": "tsp"
+      },
+      {
+        "name": "smoked paprika",
+        "amount": 1.0,
+        "unit": "tsp"
+      },
+      {
+        "name": "dried oregano",
+        "amount": 1.0,
+        "unit": "tsp"
+      },
+      {
+        "name": "small corn tortillas",
+        "amount": 8.0,
+        "unit": null
+      },
+      {
+        "name": "tomatoes, diced",
+        "amount": 2.0,
+        "unit": null
+      },
+      {
+        "name": "avocado, diced",
+        "amount": 1.0,
+        "unit": null
+      },
+      {
+        "name": "fresh coriander and lime wedges",
+        "amount": null,
+        "unit": null
+      }
+    ],
+    "steps": [
+      "Fry the onion in a little oil for 5 minutes, then add the garlic and cook for one minute.",
+      "Add the beef and brown it well, breaking it up with a spoon.",
+      "Stir in the spices, a splash of water and salt, and simmer for 5 minutes until juicy but not wet.",
+      "Warm the tortillas in a dry pan for about 30 seconds per side.",
+      "Fill the tortillas with the beef and top with tomato, avocado and coriander. Serve with lime."
+    ]
+  },
+  {
+    "name": "Spaghetti Carbonara",
+    "description": "Spaghetti Carbonara is a classic Italian pasta dish made with eggs, cheese (usually Pecorino Romano or Parmesan), pancetta, and pepper, mixed together with hot pasta to create a creamy sauce.",
+    "imageUrl": "/images/recipes/spaghetti-carbonara.jpg",
+    "ingredients": [
+      {
+        "name": "spaghetti",
+        "amount": 400.0,
+        "unit": "g"
+      },
+      {
+        "name": "guanciale or pancetta, in strips",
+        "amount": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "egg yolks",
+        "amount": 4.0,
+        "unit": null
+      },
+      {
+        "name": "whole egg",
+        "amount": 1.0,
+        "unit": null
+      },
+      {
+        "name": "pecorino romano, finely grated",
+        "amount": 60.0,
+        "unit": "g"
+      },
+      {
+        "name": "black pepper, freshly ground",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "salt, for the pasta water",
+        "amount": null,
+        "unit": null
+      }
+    ],
+    "steps": [
+      "Whisk the egg yolks, whole egg and most of the pecorino with plenty of black pepper.",
+      "Fry the guanciale in a dry pan over medium heat until crisp and the fat has melted. Turn off the heat.",
+      "Cook the spaghetti in salted water until al dente. Save a cup of the cooking water.",
+      "Move the spaghetti into the pan with the guanciale and toss it in the fat.",
+      "Let it cool for 30 seconds, then pour in the egg mixture and toss quickly, adding splashes of pasta water until creamy. Don't put it back on the heat or the eggs will scramble.",
+      "Serve right away with the rest of the pecorino and more pepper."
+    ]
+  },
+  {
+    "name": "Butter Chicken",
+    "description": "Butter Chicken, or Murgh Makhani, is a famous Indian dish featuring chicken marinated in yogurt and spices, cooked in a rich tomato and butter-based sauce, typically served with naan or rice.TEST",
+    "imageUrl": "/images/recipes/butter-chicken.jpg",
+    "ingredients": [
+      {
+        "name": "boneless chicken thighs, in bite-size pieces",
+        "amount": 600.0,
+        "unit": "g"
+      },
+      {
+        "name": "plain yoghurt",
+        "amount": 2.0,
+        "unit": "dl"
+      },
+      {
+        "name": "garam masala",
+        "amount": 1.0,
+        "unit": "tbsp"
+      },
+      {
+        "name": "chilli powder",
+        "amount": 1.0,
+        "unit": "tsp"
+      },
+      {
+        "name": "garlic, grated",
+        "amount": 3.0,
+        "unit": "cloves"
+      },
+      {
+        "name": "fresh ginger, grated",
+        "amount": 1.0,
+        "unit": "tbsp"
+      },
+      {
+        "name": "butter",
+        "amount": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "onion, finely chopped",
+        "amount": 1.0,
+        "unit": null
+      },
+      {
+        "name": "crushed tomatoes",
+        "amount": 400.0,
+        "unit": "g"
+      },
+      {
+        "name": "cream",
+        "amount": 1.5,
+        "unit": "dl"
+      },
+      {
+        "name": "salt",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "fresh coriander, to serve",
+        "amount": null,
+        "unit": null
+      }
+    ],
+    "steps": [
+      "Mix the yoghurt with half of the garam masala, the chilli powder, half of the garlic and ginger, and a pinch of salt. Stir in the chicken and let it marinate for at least 30 minutes, or overnight in the fridge.",
+      "Brown the chicken in a hot pan with a little oil, a few pieces at a time, then lift it out.",
+      "Melt the butter in the same pan over medium heat and soften the onion for 6–8 minutes until golden. Add the rest of the garlic, ginger and garam masala and cook for one minute.",
+      "Pour in the crushed tomatoes and simmer for 10 minutes, then blend the sauce smooth if you like.",
+      "Stir in the cream, return the chicken and simmer gently for 10 minutes until cooked through. Season with salt.",
+      "Top with coriander and serve with rice or naan."
+    ]
+  },
+  {
+    "name": "Croissant",
+    "description": "Croissant is a buttery, flaky pastry of Austrian origin but popularized in France. It's made from layered yeast-leavened dough, often enjoyed for breakfast or as a snack.",
+    "imageUrl": "/images/recipes/croissant.jpg",
+    "ingredients": [
+      {
+        "name": "plain flour",
+        "amount": 500.0,
+        "unit": "g"
+      },
+      {
+        "name": "salt",
+        "amount": 10.0,
+        "unit": "g"
+      },
+      {
+        "name": "sugar",
+        "amount": 55.0,
+        "unit": "g"
+      },
+      {
+        "name": "dried yeast",
+        "amount": 10.0,
+        "unit": "g"
+      },
+      {
+        "name": "cold milk",
+        "amount": 2.8,
+        "unit": "dl"
+      },
+      {
+        "name": "cold unsalted butter, for laminating",
+        "amount": 280.0,
+        "unit": "g"
+      },
+      {
+        "name": "egg, beaten, for brushing",
+        "amount": 1.0,
+        "unit": null
+      }
+    ],
+    "steps": [
+      "Mix the flour, salt, sugar, yeast and milk into a firm dough. Knead for 5 minutes, wrap and chill for at least 1 hour.",
+      "Place the butter between two sheets of baking paper and beat it into a flat 15 × 15 cm square. Keep it cold.",
+      "Roll the dough into a 30 × 30 cm square, put the butter in the middle at an angle and fold the corners over it like an envelope.",
+      "Roll the dough into a long rectangle, fold it in three like a letter, wrap and chill for 30 minutes.\nRepeat the rolling, folding and chilling two more times.",
+      "Roll the dough out to about 4 mm thick, cut it into long triangles and roll each one up from the wide end. Curve the ends slightly.",
+      "Let them rise at room temperature for 1.5–2 hours until puffy and wobbly.",
+      "Brush with beaten egg and bake at 200°C for 15–18 minutes until deep golden."
+    ]
+  },
+  {
+    "name": "Fish and Chips",
+    "description": "Fish and Chips is a classic British dish featuring battered and deep-fried fish, usually cod or haddock, served with thick-cut fries and often accompanied by tartar sauce or vinegar.",
+    "imageUrl": "/images/recipes/fish-and-chips.jpg",
+    "ingredients": [
+      {
+        "name": "white fish fillets, e.g. cod or haddock",
+        "amount": 600.0,
+        "unit": "g"
+      },
+      {
+        "name": "floury potatoes",
+        "amount": 1.0,
+        "unit": "kg"
+      },
+      {
+        "name": "plain flour, plus extra for dusting",
+        "amount": 2.0,
+        "unit": "dl"
+      },
+      {
+        "name": "baking powder",
+        "amount": 1.0,
+        "unit": "tsp"
+      },
+      {
+        "name": "cold sparkling water",
+        "amount": 2.5,
+        "unit": "dl"
+      },
+      {
+        "name": "oil, for deep-frying",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "salt",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "lemon, in wedges",
+        "amount": 1.0,
+        "unit": null
+      }
+    ],
+    "steps": [
+      "Peel the potatoes and cut them into thick chips. Rinse in cold water and pat completely dry.",
+      "Heat the oil to 150°C and fry the chips for 6–8 minutes until soft but still pale. Drain on paper.",
+      "Whisk the flour, baking powder and a pinch of salt with the cold sparkling water into a smooth, thick batter.",
+      "Raise the oil temperature to 180°C. Pat the fish dry, dust it with flour, dip it in the batter and fry for 5–7 minutes until crisp and golden. Drain.",
+      "Fry the chips again at 180°C for 2–3 minutes until crisp. Salt them straight away.",
+      "Serve the fish and chips with lemon wedges."
+    ]
+  },
+  {
+    "name": "Pancakes",
+    "description": "Pancakes are a popular breakfast dish made from a batter of flour, eggs, milk, and baking powder, cooked on a griddle or frying pan and often served with syrup and butter.",
+    "imageUrl": "/images/recipes/pancakes.jpg",
+    "ingredients": [
+      {
+        "name": "plain flour",
+        "amount": 2.5,
+        "unit": "dl"
+      },
+      {
+        "name": "sugar",
+        "amount": 1.0,
+        "unit": "tbsp"
+      },
+      {
+        "name": "baking powder",
+        "amount": 2.0,
+        "unit": "tsp"
+      },
+      {
+        "name": "salt",
+        "amount": 1.0,
+        "unit": "pinch"
+      },
+      {
+        "name": "milk",
+        "amount": 2.5,
+        "unit": "dl"
+      },
+      {
+        "name": "egg",
+        "amount": 1.0,
+        "unit": null
+      },
+      {
+        "name": "butter, melted, plus extra for frying",
+        "amount": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "maple syrup and berries, to serve",
+        "amount": null,
+        "unit": null
+      }
+    ],
+    "steps": [
+      "Mix the flour, sugar, baking powder and salt in a bowl.",
+      "Whisk the milk, egg and melted butter together, then stir them into the dry mix until just combined. A few lumps are fine.",
+      "Let the batter rest for 5 minutes.",
+      "Heat a frying pan over medium heat with a little butter and pour in about 1 dl of batter per pancake.",
+      "Flip when bubbles appear on the surface and the edges look set, then cook for another minute.",
+      "Serve warm in a stack with maple syrup and berries."
+    ]
+  },
+  {
+    "name": "Halal Hähnchengericht",
+    "description": "A flavorful chicken dish prepared according to Halal guidelines.",
+    "imageUrl": "/images/recipes/halal-chicken.jpg",
+    "ingredients": [
+      {
+        "name": "halal chicken thighs, bone in",
+        "amount": 800.0,
+        "unit": "g"
+      },
+      {
+        "name": "onions, sliced",
+        "amount": 2.0,
+        "unit": null
+      },
+      {
+        "name": "garlic, chopped",
+        "amount": 3.0,
+        "unit": "cloves"
+      },
+      {
+        "name": "paprika powder",
+        "amount": 1.0,
+        "unit": "tbsp"
+      },
+      {
+        "name": "ground cumin",
+        "amount": 1.0,
+        "unit": "tsp"
+      },
+      {
+        "name": "ground turmeric",
+        "amount": 1.0,
+        "unit": "tsp"
+      },
+      {
+        "name": "chopped tomatoes",
+        "amount": 400.0,
+        "unit": "g"
+      },
+      {
+        "name": "chicken stock",
+        "amount": 2.0,
+        "unit": "dl"
+      },
+      {
+        "name": "olive oil",
+        "amount": 2.0,
+        "unit": "tbsp"
+      },
+      {
+        "name": "salt and black pepper",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "fresh parsley, to serve",
+        "amount": null,
+        "unit": null
+      }
+    ],
+    "steps": [
+      "Season the chicken with salt, pepper and half of the spices.",
+      "Heat the oil in a wide pot and brown the chicken on both sides. Lift it out.",
+      "Fry the onions in the same pot for 8 minutes until soft, add the garlic and the rest of the spices and cook for one more minute.",
+      "Add the tomatoes and stock, put the chicken back and bring to a simmer.",
+      "Cover and cook on low heat for 35–40 minutes until the chicken is tender.",
+      "Taste for salt, sprinkle with parsley and serve with rice or bread."
+    ]
+  },
+  {
+    "name": "Paella Valenciana",
+    "description": "A traditional Spanish rice dish made with saffron, vegetables, chicken, and seafood.       ",
+    "imageUrl": "/images/recipes/paella-valenciana.jpg",
+    "ingredients": [
+      {
+        "name": "olive oil",
+        "amount": 4.0,
+        "unit": "tbsp"
+      },
+      {
+        "name": "chicken thighs, in pieces",
+        "amount": 400.0,
+        "unit": "g"
+      },
+      {
+        "name": "green beans, halved",
+        "amount": 200.0,
+        "unit": "g"
+      },
+      {
+        "name": "red pepper, in strips",
+        "amount": 1.0,
+        "unit": null
+      },
+      {
+        "name": "tomatoes, grated",
+        "amount": 2.0,
+        "unit": null
+      },
+      {
+        "name": "smoked paprika",
+        "amount": 1.0,
+        "unit": "tsp"
+      },
+      {
+        "name": "saffron",
+        "amount": 1.0,
+        "unit": "pinch"
+      },
+      {
+        "name": "paella rice, e.g. bomba",
+        "amount": 300.0,
+        "unit": "g"
+      },
+      {
+        "name": "hot chicken stock",
+        "amount": 9.0,
+        "unit": "dl"
+      },
+      {
+        "name": "large prawns",
+        "amount": 250.0,
+        "unit": "g"
+      },
+      {
+        "name": "mussels, cleaned",
+        "amount": 250.0,
+        "unit": "g"
+      },
+      {
+        "name": "salt",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "lemon, in wedges",
+        "amount": 1.0,
+        "unit": null
+      }
+    ],
+    "steps": [
+      "Heat the oil in a wide paella pan and brown the chicken well with a little salt.",
+      "Add the beans and pepper and fry for 5 minutes, then stir in the grated tomato and paprika and cook until thick.",
+      "Soak the saffron in the hot stock for a few minutes.",
+      "Scatter the rice evenly over the pan, pour in the stock and give it one stir. Do not stir again from here.",
+      "Simmer on medium heat for 10 minutes, then press the prawns and mussels into the rice.",
+      "Cook for another 8–10 minutes until the rice has absorbed the liquid. Turn up the heat for the last minute to form a crispy base.",
+      "Take the pan off the heat, cover with a towel for 5 minutes and serve with lemon."
+    ]
+  },
+  {
+    "name": "Sushi",
+    "description": "Sushi is a traditional Japanese dish featuring vinegared rice accompanied by various ingredients such as raw fish, vegetables, and seaweed, often served with soy sauce, wasabi, and pickled ginger.",
+    "imageUrl": "/images/recipes/sushi.jpg",
+    "ingredients": [
+      {
+        "name": "sushi rice",
+        "amount": 4.0,
+        "unit": "dl"
+      },
+      {
+        "name": "water",
+        "amount": 4.5,
+        "unit": "dl"
+      },
+      {
+        "name": "rice vinegar",
+        "amount": 0.75,
+        "unit": "dl"
+      },
+      {
+        "name": "sugar",
+        "amount": 2.0,
+        "unit": "tbsp"
+      },
+      {
+        "name": "salt",
+        "amount": 1.0,
+        "unit": "tsp"
+      },
+      {
+        "name": "nori sheets",
+        "amount": 4.0,
+        "unit": null
+      },
+      {
+        "name": "sushi-grade salmon",
+        "amount": 200.0,
+        "unit": "g"
+      },
+      {
+        "name": "cucumber, in thin sticks",
+        "amount": 1.0,
+        "unit": null
+      },
+      {
+        "name": "avocado, sliced",
+        "amount": 1.0,
+        "unit": null
+      },
+      {
+        "name": "soy sauce, wasabi and pickled ginger, to serve",
+        "amount": null,
+        "unit": null
+      }
+    ],
+    "steps": [
+      "Rinse the rice in cold water until it runs clear, then cook it with the water on low heat for 12 minutes and let it steam off the heat for 10 minutes.",
+      "Warm the vinegar, sugar and salt until dissolved and fold it into the rice. Let it cool to room temperature.",
+      "Cut the salmon into finger-long strips.",
+      "Place a nori sheet shiny side down on a bamboo mat. With wet hands, spread a thin layer of rice over it, leaving 2 cm free at the top.",
+      "Lay salmon, cucumber and avocado in a line across the rice and roll up tightly with the mat.",
+      "Cut each roll into 8 pieces with a sharp, wet knife. Serve with soy sauce, wasabi and ginger."
+    ]
+  }
+]

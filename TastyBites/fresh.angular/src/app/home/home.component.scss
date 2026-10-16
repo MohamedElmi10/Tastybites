@@ -1,0 +1,77 @@
+.hero-row {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 48px;
+  align-items: center;
+  padding-block: 64px 56px;
+}
+
+h1 {
+  font-family: var(--tb-display);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 6vw, 4.4rem);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin: 0;
+
+  em {
+    font-style: normal;
+    color: var(--tb-tomato);
+  }
+}
+
+.lede {
+  color: var(--tb-muted);
+  font-size: 1.15rem;
+  margin: 18px 0 0;
+  max-width: 46ch;
+}
+
+.cta {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+
+.stat {
+  margin: 28px 0 0;
+  color: var(--tb-muted);
+  font-size: 0.9rem;
+
+  b {
+    color: var(--tb-ink);
+  }
+}
+
+.hero-photo {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  text-decoration: none;
+  color: var(--tb-muted);
+  --photo-ratio: 5 / 4;
+
+  app-recipe-photo {
+    width: min(460px, 100%);
+    box-shadow: 0 24px 50px -24px rgba(0, 0, 0, 0.4);
+    border-radius: 14px;
+  }
+
+  b {
+    color: var(--tb-ink);
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 860px) {
+  .hero-row {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding-block: 40px;
+  }
+
+  .hero-photo {
+    order: -1;
+  }
+}

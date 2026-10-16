@@ -1,0 +1,85 @@
+<div class="container py-4">
+  <!-- Signed out -->
+  <div class="card welcome mx-auto text-center" *ngIf="!hasLoggedIn">
+    <div class="card-body p-5">
+      <h1 class="h3">{{ '::Dashboard:WelcomeTitle' | abpLocalization }}</h1>
+      <p class="text-muted mb-4">{{ '::Dashboard:WelcomeText' | abpLocalization }}</p>
+      <button type="button" role="button" class="btn btn-primary" (click)="login()">
+        <i class="fas fa-sign-in-alt me-1"></i>{{ 'AbpAccount::Login' | abpLocalization }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Signed in -->
+  <ng-container *ngIf="hasLoggedIn">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-4">
+      <h1 class="h3 mb-0">{{ '::Dashboard:Title' | abpLocalization }}</h1>
+      <div class="d-flex flex-wrap gap-2">
+        <a class="btn btn-primary" routerLink="/recipes/create" *abpPermission="'TastyBites.Recipes.Create'">
+          <i class="fas fa-plus me-1"></i>{{ '::Recipes:Create' | abpLocalization }}
+        </a>
+        <a class="btn btn-outline-secondary" [href]="publicSiteUrl" target="_blank" rel="noopener">
+          {{ '::Dashboard:OpenPublicSite' | abpLocalization }}<i class="fas fa-external-link-alt ms-2"></i>
+        </a>
+      </div>
+    </div>
+
+    <p class="text-muted" *ngIf="!dashboard$">{{ '::Dashboard:NoRecipeAccess' | abpLocalization }}</p>
+
+    <ng-container *ngIf="dashboard$ | async as data">
+      <div class="row g-3 mb-4">
+        <div class="col-sm-4">
+          <div class="card stat h-100">
+            <div class="card-body">
+              <div class="stat-value">{{ data.stats.totalRecipes }}</div>
+              <div class="text-muted">{{ '::Dashboard:TotalRecipes' | abpLocalization }}</div>
+            </div>
+          </div>
+        </div>
+        <!-- why: the "missing" cards turn orange when above 0, so they read as the Admin's to-do list -->
+        <div class="col-sm-4">
+          <div class="card stat h-100" [class.stat-todo]="data.stats.withoutPhoto > 0">
+            <div class="card-body">
+              <div class="stat-value">{{ data.stats.withoutPhoto }}</div>
+              <div class="text-muted">{{ '::Dashboard:WithoutPhoto' | abpLocalization }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="card stat h-100" [class.stat-todo]="data.stats.withoutIngredientsOrSteps > 0">
+            <div class="card-body">
+              <div class="stat-value">{{ data.stats.withoutIngredientsOrSteps }}</div>
+              <div class="text-muted">{{ '::Dashboard:WithoutIngredientsOrSteps' | abpLocalization }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h2 class="h6 mb-0">{{ '::Dashboard:NewestRecipes' | abpLocalization }}</h2>
+          <a routerLink="/recipes/list">{{ '::Dashboard:SeeAll' | abpLocalization }}</a>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item text-muted" *ngIf="!data.recent.length">
+            {{ '::Recipes:Empty' | abpLocalization }}
+          </li>
+          <li class="list-group-item d-flex align-items-center gap-3" *ngFor="let recipe of data.recent">
+            <img *ngIf="recipe.imageUrl; else noImage" class="thumb" [src]="recipe.imageUrl | imageSrc" alt="" />
+            <ng-template #noImage>
+              <span class="thumb thumb-empty"><i class="fas fa-utensils"></i></span>
+            </ng-template>
+            <span class="flex-grow-1">{{ recipe.name }}</span>
+            <a
+              class="btn btn-outline-primary btn-sm"
+              [routerLink]="['/recipes/edit', recipe.id]"
+              *abpPermission="'TastyBites.Recipes.Edit'"
+            >
+              {{ '::Recipes:EditButton' | abpLocalization }}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>

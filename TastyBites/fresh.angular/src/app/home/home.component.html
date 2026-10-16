@@ -1,0 +1,34 @@
+<ng-container *ngIf="recent$ | async as recent">
+  <section class="hero">
+    <div class="site-wrap hero-row">
+      <div>
+        <h1>Tonight's dinner, <em>sorted.</em></h1>
+        <p class="lede">
+          Simple recipes from kitchens around the world. Pick one, read it, start cooking. No sign-up needed.
+        </p>
+        <div class="cta">
+          <a class="tb-btn tb-btn-primary" routerLink="/recipes">Browse all recipes</a>
+          <a class="tb-btn tb-btn-ghost" *ngIf="recent[0] as newest" [routerLink]="['/recipes', newest.id]">Try the newest</a>
+        </div>
+        <p class="stat" *ngIf="total$ | async as total"><b>{{ total }}</b> recipes and counting</p>
+      </div>
+
+      <a class="hero-photo" *ngIf="recent[0] as newest" [routerLink]="['/recipes', newest.id]">
+        <app-recipe-photo [url]="newest.imageUrl" [name]="newest.name ?? ''"></app-recipe-photo>
+        <small>Newest: <b>{{ newest.name }}</b></small>
+      </a>
+    </div>
+  </section>
+
+  <section class="block" *ngIf="recent.length">
+    <div class="site-wrap">
+      <div class="block-head">
+        <h2>Just added</h2>
+        <a routerLink="/recipes">See all →</a>
+      </div>
+      <div class="card-grid">
+        <app-recipe-card *ngFor="let recipe of recent" [recipe]="recipe" [isNew]="true"></app-recipe-card>
+      </div>
+    </div>
+  </section>
+</ng-container>

@@ -1,0 +1,149 @@
+.detail-row {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 56px;
+  align-items: center;
+  padding-block: 40px 56px;
+}
+
+.back {
+  display: inline-flex;
+  color: var(--tb-muted);
+  text-decoration: none;
+  font-weight: 500;
+  margin-bottom: 18px;
+
+  &:hover {
+    color: var(--tb-ink);
+  }
+}
+
+h1 {
+  font-family: var(--tb-display);
+  font-weight: 400;
+  font-size: clamp(2.4rem, 5.5vw, 4rem);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin: 0;
+}
+
+.desc {
+  font-size: 1.15rem;
+  margin: 18px 0 0;
+  max-width: 52ch;
+}
+
+app-recipe-photo {
+  box-shadow: 0 24px 50px -24px rgba(0, 0, 0, 0.4);
+  border-radius: 14px;
+}
+
+.loading {
+  padding-block: 64px;
+}
+
+/* ---------- Ingredients + steps ---------- */
+.cook-grid {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) 2fr;
+  gap: 48px;
+  align-items: start;
+}
+
+// why: a recipe with only one of the lists uses the full width instead of leaving an empty column
+.cook-grid > :only-child {
+  grid-column: 1 / -1;
+}
+
+h2 {
+  font-family: var(--tb-display);
+  font-weight: 400;
+  font-size: 1.8rem;
+  margin: 0 0 14px;
+}
+
+.ingredients {
+  background: var(--tb-surface);
+  border: 1px solid var(--tb-line);
+  border-radius: 14px;
+  padding: 24px 26px;
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    display: flex;
+    gap: 10px;
+    padding-block: 9px;
+    border-bottom: 1px dashed var(--tb-line);
+
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+
+  .qty {
+    font-weight: 600;
+    color: var(--tb-herb);
+    white-space: nowrap;
+  }
+}
+
+.steps {
+  ol {
+    // why: own counter instead of the browser's numbers, so they can be styled big in the display font
+    counter-reset: step;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    counter-increment: step;
+    display: grid;
+    grid-template-columns: 2.75rem 1fr;
+    gap: 14px;
+    padding-block: 14px;
+    border-bottom: 1px solid var(--tb-line);
+    font-size: 1.05rem;
+    max-width: 68ch;
+    white-space: pre-line; // why: keep line breaks the Admin typed in the step textarea
+
+    &:first-child {
+      padding-top: 4px;
+    }
+
+    &:last-child {
+      border-bottom: 0;
+    }
+
+    &::before {
+      content: counter(step);
+      font-family: var(--tb-display);
+      font-size: 2rem;
+      line-height: 1;
+      color: var(--tb-tomato);
+    }
+  }
+}
+
+@media (max-width: 860px) {
+  .detail-row {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding-block: 28px 40px;
+  }
+
+  app-recipe-photo {
+    order: -1;
+  }
+
+  // One column; ingredients come first in the HTML, so they stay on top (shop + prep before cooking)
+  .cook-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}

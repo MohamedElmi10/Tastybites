@@ -1,0 +1,66 @@
+<ng-container *ngIf="state$ | async as state; else loading">
+  <ng-container *ngIf="state.recipe as recipe; else notFound">
+    <section class="detail">
+      <div class="site-wrap detail-row">
+        <div>
+          <a class="back" routerLink="/recipes">← All recipes</a>
+          <h1>{{ recipe.name }}</h1>
+          <p class="desc">{{ recipe.description }}</p>
+        </div>
+        <app-recipe-photo [url]="recipe.imageUrl" [name]="recipe.name ?? ''"></app-recipe-photo>
+      </div>
+    </section>
+
+    <!-- Hidden for older recipes that have neither list yet -->
+    <section class="block block-tight" *ngIf="recipe.ingredients.length || recipe.steps.length">
+      <div class="site-wrap cook-grid">
+        <aside class="ingredients" *ngIf="recipe.ingredients.length">
+          <h2>Ingredients</h2>
+          <!-- why: role="list" because Safari drops list semantics when list-style is none -->
+          <ul role="list">
+            <li *ngFor="let ingredient of recipe.ingredients">
+              <!-- Left out for e.g. "salt", so the name sits flush left -->
+              <span class="qty" *ngIf="ingredient.amount != null || ingredient.unit">
+                {{ ingredient.amount }} {{ ingredient.unit }}
+              </span>
+              <span>{{ ingredient.name }}</span>
+            </li>
+          </ul>
+        </aside>
+
+        <div class="steps" *ngIf="recipe.steps.length">
+          <h2>Steps</h2>
+          <ol role="list">
+            <li *ngFor="let step of recipe.steps">{{ step.text }}</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" *ngIf="others$ | async as others">
+      <div class="site-wrap" *ngIf="others.length">
+        <div class="block-head">
+          <h2>More to cook</h2>
+          <a routerLink="/recipes">See all →</a>
+        </div>
+        <div class="card-grid">
+          <app-recipe-card *ngFor="let other of others" [recipe]="other"></app-recipe-card>
+        </div>
+      </div>
+    </section>
+  </ng-container>
+</ng-container>
+
+<ng-template #loading>
+  <div class="site-wrap"><p class="muted loading">Loading recipe…</p></div>
+</ng-template>
+
+<ng-template #notFound>
+  <section class="page-head">
+    <div class="site-wrap">
+      <h1>Recipe not found</h1>
+      <p>It may have been removed, or the link is wrong.</p>
+      <p><a class="tb-btn tb-btn-primary" routerLink="/recipes">Browse all recipes</a></p>
+    </div>
+  </section>
+</ng-template>
