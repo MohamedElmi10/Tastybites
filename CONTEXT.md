@@ -28,6 +28,14 @@ _Avoid_: Frontend, landing page, client
 A dish with a name and a description that the Admin publishes for Visitors.
 _Avoid_: Dish, post, item
 
+**Ingredient**:
+One line in a Recipe's ingredient list: a name, with an optional amount and unit (e.g. "200 g flour", "salt").
+_Avoid_: Item, component, product
+
+**Step**:
+One instruction in a Recipe, shown to Visitors as part of a numbered list.
+_Avoid_: Instruction, direction, method
+
 **Recent recipes**:
 The most recently added recipes, shown first.
 _Avoid_: Latest, new recipes

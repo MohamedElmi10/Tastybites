@@ -39,6 +39,7 @@ namespace TastyBites.Recipes
             recipe.Name = recipe.Name.Trim();
             recipe.Description = recipe.Description.Trim();
             recipe.ImageUrl = recipe.ImageUrl?.Trim();
+            ReplaceIngredientsAndSteps(recipe, input);
             await _recipesRepository.InsertAsync(recipe, autoSave: true);
             var recipeDto = ObjectMapper.Map<Recipe, RecipeDto>(recipe);
             return recipeDto;
@@ -52,9 +53,36 @@ namespace TastyBites.Recipes
             //IMPORTANT: Any values not present in the DTO will remain unchanged in the recipe.
 
             ObjectMapper.Map<RecipeDto,Recipe>(input,recipe);
+            ReplaceIngredientsAndSteps(recipe, input);
             await _recipesRepository.UpdateAsync(recipe,autoSave: true);
             var recipeDto = ObjectMapper.Map<Recipe, RecipeDto>(recipe);
             return recipeDto;
+        }
+
+        // why: throw away the old lists and save the new ones instead of matching item by item -
+        // max 50 rows each, so it's cheap and much simpler (docs/adr/0001).
+        // Removing a child from the loaded list makes EF delete its row on save.
+        private static void ReplaceIngredientsAndSteps(Recipe recipe, RecipeDto input)
+        {
+            recipe.Ingredients.Clear();
+            var ingredients = input.Ingredients ?? new List<RecipeIngredientDto>(); // why: JSON "ingredients": null would otherwise crash
+            for (var i = 0; i < ingredients.Count; i++)
+            {
+                recipe.Ingredients.Add(new RecipeIngredient
+                {
+                    Name = ingredients[i].Name.Trim(),
+                    Amount = ingredients[i].Amount,
+                    Unit = string.IsNullOrWhiteSpace(ingredients[i].Unit) ? null : ingredients[i].Unit!.Trim(),
+                    SortOrder = i // list position = order on the page
+                });
+            }
+
+            recipe.Steps.Clear();
+            var steps = input.Steps ?? new List<RecipeStepDto>();
+            for (var i = 0; i < steps.Count; i++)
+            {
+                recipe.Steps.Add(new RecipeStep { Text = steps[i].Text.Trim(), SortOrder = i });
+            }
         }
         //override the delete method
         [Authorize(TastyBitesPermissions.Recipes.Delete)]

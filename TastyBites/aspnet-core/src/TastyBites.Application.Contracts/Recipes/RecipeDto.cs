@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Volo.Abp.Application.Dtos;
 
@@ -18,5 +19,13 @@ namespace TastyBites.Recipes
         [Url]
         [StringLength(RecipeConsts.ImageUrlMaxLength)]
         public string? ImageUrl { get; set; }
+
+        // Only filled when fetching ONE recipe (GetAsync); list endpoints return them empty.
+        // why: MaxLength on a list limits the item count, so one request can't insert thousands of rows
+        [MaxLength(RecipeConsts.MaxIngredients)]
+        public List<RecipeIngredientDto> Ingredients { get; set; } = new();
+
+        [MaxLength(RecipeConsts.MaxSteps)]
+        public List<RecipeStepDto> Steps { get; set; } = new();
     }
 }
