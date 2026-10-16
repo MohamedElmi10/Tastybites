@@ -1,0 +1,16 @@
+# Live demo of the public site (static, no backend) - see README "Live demo".
+# Netlify clones the whole repo; the build runs inside the public app's folder and also reads
+# the seed data and photos from aspnet-core (see the "static" configuration in angular.json).
+[build]
+  base = "TastyBites/fresh.angular"
+  command = "npm ci && npx ng build -c static"
+  publish = "dist/static"
+
+[build.environment]
+  NODE_VERSION = "18" # Angular 16 needs Node 16/18 (same as .nvmrc)
+
+# Single-page app: let Angular's router handle every URL, e.g. a shared link to /recipes/6
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

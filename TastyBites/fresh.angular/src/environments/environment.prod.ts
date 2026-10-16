@@ -2,6 +2,9 @@ import { Environment } from '@abp/ng.core';
 
 const baseUrl = 'http://localhost:4200';
 
+// true only in environment.static.ts (the backend-less demo build)
+export const staticDemo = false;
+
 export const environment = {
   production: true,
   application: {
