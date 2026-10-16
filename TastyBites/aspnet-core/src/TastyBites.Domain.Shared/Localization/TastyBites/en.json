@@ -25,6 +25,21 @@
     "Permission:Recipes.Delete": "Delete recipes",
     "Recipes:ImageUrl": "Image URL (optional)",
     "Recipes:ImageUrlHint": "Paste a link to a photo you have the right to use, e.g. your own or from Unsplash/Pexels.",
-    "Recipes:ImageLoadFailed": "This image couldn't be loaded. Check the link."
+    "Recipes:ImageLoadFailed": "This image couldn't be loaded. Check the link.",
+    "Recipes:Ingredients": "Ingredients",
+    "Recipes:IngredientsHint": "Amount and unit are optional, e.g. just \"salt\".",
+    "Recipes:IngredientName": "Ingredient",
+    "Recipes:Amount": "Amount",
+    "Recipes:Unit": "Unit",
+    "Recipes:AddIngredient": "Add ingredient",
+    "Recipes:NoIngredients": "No ingredients yet.",
+    "Recipes:Steps": "Steps",
+    "Recipes:Step": "Step",
+    "Recipes:AddStep": "Add step",
+    "Recipes:NoSteps": "No steps yet.",
+    "Recipes:MoveUp": "Move up",
+    "Recipes:MoveDown": "Move down",
+    "Recipes:Remove": "Remove",
+    "Recipes:MaxItems": "Maximum of {0} reached."
   }
 }

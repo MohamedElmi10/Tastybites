@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { NgIf } from '@angular/common';
+import { environment } from '../../environments/environment';
 
 // Shows the recipe's photo, or one shared placeholder when there is no ImageUrl
 // or the link is broken. Standalone component: no NgModule needed, just import it where used.
@@ -9,7 +10,7 @@ import { NgIf } from '@angular/common';
   imports: [NgIf],
   template: `
     <div class="photo" [class.placeholder]="!showImage">
-      <img *ngIf="showImage" [src]="url" [alt]="name" loading="lazy" (error)="failed = true" />
+      <img *ngIf="showImage" [src]="src" [alt]="name" loading="lazy" (error)="failed = true" />
       <ng-container *ngIf="!showImage">
         <svg viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true">
           <circle cx="60" cy="40" r="26" />
@@ -31,5 +32,13 @@ export class RecipePhotoComponent {
 
   get showImage(): boolean {
     return !!this.url && !this.failed;
+  }
+
+  // "/images/recipes/x.jpg" is a photo hosted by our API -> prefix the API address; full links stay as they are.
+  // why: the database stores self-hosted photos as a relative path so it survives a domain change
+  // (the admin app has the same rule in its ImageSrcPipe)
+  get src(): string | null {
+    if (!this.url) return null;
+    return this.url.startsWith('/') ? environment.apis.default.url + this.url : this.url;
   }
 }

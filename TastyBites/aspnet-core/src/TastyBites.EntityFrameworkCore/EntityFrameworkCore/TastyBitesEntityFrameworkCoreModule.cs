@@ -1,5 +1,8 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using TastyBites.Recipes;
+using Volo.Abp.EntityFrameworkCore.DependencyInjection;
 using Volo.Abp.Uow;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
@@ -48,6 +51,18 @@ public class TastyBitesEntityFrameworkCoreModule : AbpModule
                 /* The main point to change your DBMS.
                  * See also TastyBitesMigrationsDbContextFactory for EF Core tooling. */
             options.UseMySQL();
+        });
+
+        // why: repository.GetAsync(id) now loads a recipe's ingredients and steps automatically, for both the
+        // admin and the public service. List queries don't use this, so recipe lists stay one cheap query.
+        Configure<AbpEntityOptions>(options =>
+        {
+            options.Entity<Recipe>(recipeOptions =>
+            {
+                recipeOptions.DefaultWithDetailsFunc = query => query
+                    .Include(r => r.Ingredients)
+                    .Include(r => r.Steps);
+            });
         });
 
     }
