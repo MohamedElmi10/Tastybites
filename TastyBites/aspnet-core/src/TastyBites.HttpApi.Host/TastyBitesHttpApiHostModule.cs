@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -21,6 +22,7 @@ using Volo.Abp.Account;
 using Volo.Abp.Account.Web;
 using Volo.Abp.AspNetCore.MultiTenancy;
 using Volo.Abp.AspNetCore.Mvc;
+using Volo.Abp.AspNetCore.Mvc.AntiForgery;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Serilog;
@@ -97,6 +99,18 @@ public class TastyBitesHttpApiHostModule : AbpModule
         ConfigureVirtualFileSystem(context);
         ConfigureCors(context, configuration);
         ConfigureSwaggerServices(context, configuration);
+        ConfigureAntiForgery();
+    }
+
+    private void ConfigureAntiForgery()
+    {
+        // why: ABP's default XSRF-TOKEN cookie is SameSite=None, which Chrome only accepts over HTTPS.
+        // On http://localhost the browser drops it, so Swagger can't send the antiforgery header -> every POST/PUT is 400.
+        // Lax = "only send to this same site", which is all we need (Swagger and the API share localhost:5001).
+        Configure<AbpAntiForgeryOptions>(options =>
+        {
+            options.TokenCookie.SameSite = SameSiteMode.Lax;
+        });
     }
 
     private void ConfigureAuthentication(ServiceConfigurationContext context)
