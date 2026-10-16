@@ -12,6 +12,12 @@
     <ProjectReference Include="..\TastyBites.Domain.Shared\TastyBites.Domain.Shared.csproj" />
   </ItemGroup>
 
+  <!-- why: embedded in the DLL, so the seeder finds its data wherever DbMigrator runs (no file path to get wrong).
+       LogicalName fixes the resource name instead of relying on folder-based naming. -->
+  <ItemGroup>
+    <EmbeddedResource Include="Recipes\Seed\recipe-seed-data.json" LogicalName="TastyBites.Recipes.recipe-seed-data.json" />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Emailing" Version="7.4.5" />
     <PackageReference Include="Volo.Abp.Identity.Domain" Version="7.4.5" />
