@@ -50,6 +50,15 @@ public class TastyBitesHttpApiHostModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {
+        // why: the key signs every login token, so it must never be in git. Locally it comes from
+        // appsettings.secrets.json (gitignored), on a server from the env var OpenIddict__SigningKey.
+        var signingKey = context.Services.GetConfiguration()["OpenIddict:SigningKey"];
+        if (string.IsNullOrWhiteSpace(signingKey))
+        {
+            throw new InvalidOperationException(
+                "OpenIddict:SigningKey is missing. Copy appsettings.secrets.example.json to appsettings.secrets.json and fill it in.");
+        }
+
         PreConfigure<OpenIddictBuilder>(builder =>
         {
             builder.AddValidation(options =>
@@ -69,7 +78,7 @@ public class TastyBitesHttpApiHostModule : AbpModule
                 options.SetIssuer(new Uri("http://localhost:5001"));
                 
                 // Use symmetric keys instead of certificates
-                var key = new SymmetricSecurityKey(Convert.FromBase64String("DRjd/GnduI3Efzen9V9BvbNUfc/VKgXltV7Kbk9sMkY="));
+                var key = new SymmetricSecurityKey(Convert.FromBase64String(signingKey));
                 options.AddEncryptionKey(key);
                 options.AddSigningKey(key);
                 
