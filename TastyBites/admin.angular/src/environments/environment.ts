@@ -2,6 +2,9 @@ import { Environment } from '@abp/ng.core';
 
 const baseUrl = 'http://localhost:4200';
 
+// The visitor site (fresh.angular). Separate export because ABP's Environment type has no field for it.
+export const publicSiteUrl = 'http://localhost:4201';
+
 export const environment = {
   production: false,
   application: {

@@ -1,1 +1,31 @@
-/* Styles for the home component */
+.welcome {
+  max-width: 520px;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+// Something still to do (missing photos or lists)
+.stat-todo {
+  border-color: var(--bs-warning, #ffc107);
+  background: var(--bs-warning-bg-subtle, #fff3cd);
+}
+
+.thumb {
+  width: 56px;
+  height: 42px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.thumb-empty {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bs-secondary-bg, #e9ecef);
+  color: var(--bs-secondary-color, #6c757d);
+}

@@ -40,6 +40,16 @@
     "Recipes:MoveUp": "Move up",
     "Recipes:MoveDown": "Move down",
     "Recipes:Remove": "Remove",
-    "Recipes:MaxItems": "Maximum of {0} reached."
+    "Recipes:MaxItems": "Maximum of {0} reached.",
+    "Dashboard:WelcomeTitle": "TastyBites admin",
+    "Dashboard:WelcomeText": "Log in to manage the recipes on the public site.",
+    "Dashboard:Title": "Dashboard",
+    "Dashboard:OpenPublicSite": "Open public site",
+    "Dashboard:NoRecipeAccess": "You are logged in, but you don't have permission to manage recipes.",
+    "Dashboard:TotalRecipes": "Recipes",
+    "Dashboard:WithoutPhoto": "Missing a photo",
+    "Dashboard:WithoutIngredientsOrSteps": "Missing ingredients or steps",
+    "Dashboard:NewestRecipes": "Newest recipes",
+    "Dashboard:SeeAll": "See all"
   }
 }

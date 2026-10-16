@@ -2,6 +2,9 @@ import { Environment } from '@abp/ng.core';
 
 const baseUrl = 'http://localhost:4200';
 
+// The visitor site (fresh.angular). Set to the real address when deploying.
+export const publicSiteUrl = 'http://localhost:4201';
+
 export const environment = {
   production: true,
   application: {

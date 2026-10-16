@@ -121,6 +121,18 @@ namespace TastyBites.Recipes
             var recipes = await AsyncExecuter.ToListAsync(queryable.OrderBy(r => r.Name));
             return ObjectMapper.Map<List<Recipe>, List<RecipeDto>>(recipes);
         }
-    
+
+        // Counts for the admin dashboard.
+        // why: each count runs as a COUNT query in the database, so no recipes are loaded into memory
+        public async Task<RecipeStatsDto> GetStatsAsync()
+        {
+            var queryable = await _recipesRepository.GetQueryableAsync();
+            return new RecipeStatsDto
+            {
+                TotalRecipes = await AsyncExecuter.CountAsync(queryable),
+                WithoutPhoto = await AsyncExecuter.CountAsync(queryable, r => r.ImageUrl == null || r.ImageUrl == ""),
+                WithoutIngredientsOrSteps = await AsyncExecuter.CountAsync(queryable, r => !r.Ingredients.Any() || !r.Steps.Any()),
+            };
+        }
     }
 }
