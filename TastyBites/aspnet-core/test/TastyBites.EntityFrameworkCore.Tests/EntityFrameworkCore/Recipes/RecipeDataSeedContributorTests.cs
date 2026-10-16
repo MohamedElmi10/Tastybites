@@ -13,7 +13,7 @@ namespace TastyBites.EntityFrameworkCore.Recipes;
 // (including RecipeDataSeedContributor) on an empty database before each test.
 public class RecipeDataSeedContributorTests : TastyBitesEntityFrameworkCoreTestBase
 {
-    private const int SeededRecipeCount = 15; // entries in Recipes/Seed/recipe-seed-data.json
+    private const int SeededRecipeCount = 12; // entries in Recipes/Seed/recipe-seed-data.json
 
     private readonly IRepository<Recipe, int> _recipesRepository;
     private readonly IDataSeeder _dataSeeder;
