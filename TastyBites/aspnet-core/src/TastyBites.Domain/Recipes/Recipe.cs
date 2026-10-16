@@ -17,5 +17,9 @@ namespace TastyBites.Recipes
 
         // Link to a photo of the dish. Optional: recipes without one show a placeholder.
         public string? ImageUrl { get; set; }
+
+        // One-to-many: a recipe has many ingredients and many steps
+        public List<RecipeIngredient> Ingredients { get; set; } = new();
+        public List<RecipeStep> Steps { get; set; } = new();
     }
 }
