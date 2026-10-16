@@ -55,7 +55,133 @@
           </p>
         </div>
       </div>
+
+      <!-- Ingredients: one row per FormGroup in the "ingredients" FormArray -->
+      <fieldset class="mt-4" formArrayName="ingredients">
+        <legend class="form-label fs-6 fw-semibold">{{ '::Recipes:Ingredients' | abpLocalization }}</legend>
+        <small class="text-muted d-block mb-2">{{ '::Recipes:IngredientsHint' | abpLocalization }}</small>
+
+        <p class="text-muted small" *ngIf="!ingredients.length">{{ '::Recipes:NoIngredients' | abpLocalization }}</p>
+
+        <div
+          class="list-row ingredient-row"
+          *ngFor="let row of ingredients.controls; let i = index; let first = first; let last = last"
+          [formGroupName]="i"
+        >
+          <input
+            type="number"
+            class="form-control form-control-sm amount"
+            formControlName="amount"
+            min="0"
+            step="any"
+            [placeholder]="'::Recipes:Amount' | abpLocalization"
+            [attr.aria-label]="'::Recipes:Amount' | abpLocalization"
+            [class.is-invalid]="row.controls.amount.invalid && row.controls.amount.touched"
+          />
+          <input
+            type="text"
+            class="form-control form-control-sm unit"
+            formControlName="unit"
+            [maxlength]="ingredientUnitMaxLength"
+            [placeholder]="'::Recipes:Unit' | abpLocalization"
+            [attr.aria-label]="'::Recipes:Unit' | abpLocalization"
+          />
+          <input
+            type="text"
+            class="form-control form-control-sm"
+            formControlName="name"
+            [maxlength]="ingredientNameMaxLength"
+            [placeholder]="('::Recipes:IngredientName' | abpLocalization) + ' *'"
+            [attr.aria-label]="'::Recipes:IngredientName' | abpLocalization"
+            [class.is-invalid]="row.controls.name.invalid && row.controls.name.touched"
+          />
+          <ng-container
+            *ngTemplateOutlet="rowButtons; context: { array: ingredients, i: i, first: first, last: last }"
+          ></ng-container>
+        </div>
+
+        <button
+          type="button"
+          class="btn btn-sm btn-outline-primary mt-1"
+          (click)="addIngredient()"
+          [disabled]="ingredients.length >= maxIngredients"
+        >
+          <i class="fas fa-plus me-1"></i>{{ '::Recipes:AddIngredient' | abpLocalization }}
+        </button>
+        <small class="text-muted ms-2" *ngIf="ingredients.length >= maxIngredients">
+          {{ '::Recipes:MaxItems' | abpLocalization: maxIngredients.toString() }}
+        </small>
+      </fieldset>
+
+      <!-- Steps: one FormControl (the text) per row in the "steps" FormArray -->
+      <fieldset class="mt-4" formArrayName="steps">
+        <legend class="form-label fs-6 fw-semibold">{{ '::Recipes:Steps' | abpLocalization }}</legend>
+
+        <p class="text-muted small" *ngIf="!steps.length">{{ '::Recipes:NoSteps' | abpLocalization }}</p>
+
+        <div class="list-row step-row" *ngFor="let step of steps.controls; let i = index; let first = first; let last = last">
+          <span class="step-number" aria-hidden="true">{{ i + 1 }}.</span>
+          <textarea
+            class="form-control form-control-sm"
+            rows="2"
+            [formControlName]="i"
+            [maxlength]="stepTextMaxLength"
+            [attr.aria-label]="('::Recipes:Step' | abpLocalization) + ' ' + (i + 1)"
+            [class.is-invalid]="step.invalid && step.touched"
+          ></textarea>
+          <ng-container
+            *ngTemplateOutlet="rowButtons; context: { array: steps, i: i, first: first, last: last }"
+          ></ng-container>
+        </div>
+
+        <button
+          type="button"
+          class="btn btn-sm btn-outline-primary mt-1"
+          (click)="addStep()"
+          [disabled]="steps.length >= maxSteps"
+        >
+          <i class="fas fa-plus me-1"></i>{{ '::Recipes:AddStep' | abpLocalization }}
+        </button>
+        <small class="text-muted ms-2" *ngIf="steps.length >= maxSteps">
+          {{ '::Recipes:MaxItems' | abpLocalization: maxSteps.toString() }}
+        </small>
+      </fieldset>
     </div>
+
+    <!-- why: both lists need the same ↑ ↓ ✕ buttons, so they share one template instead of copy-paste -->
+    <ng-template #rowButtons let-array="array" let-i="i" let-first="first" let-last="last">
+      <div class="btn-group btn-group-sm row-buttons">
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          (click)="move(array, i, -1)"
+          [disabled]="first"
+          [title]="'::Recipes:MoveUp' | abpLocalization"
+          [attr.aria-label]="'::Recipes:MoveUp' | abpLocalization"
+        >
+          <i class="fas fa-arrow-up"></i>
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          (click)="move(array, i, 1)"
+          [disabled]="last"
+          [title]="'::Recipes:MoveDown' | abpLocalization"
+          [attr.aria-label]="'::Recipes:MoveDown' | abpLocalization"
+        >
+          <i class="fas fa-arrow-down"></i>
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-danger"
+          (click)="remove(array, i)"
+          [title]="'::Recipes:Remove' | abpLocalization"
+          [attr.aria-label]="'::Recipes:Remove' | abpLocalization"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </ng-template>
 
     <div class="card-footer d-flex justify-content-end gap-2">
       <a class="btn btn-outline-secondary" routerLink="/recipes/list">
