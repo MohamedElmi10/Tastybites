@@ -2,11 +2,11 @@
 
 A recipe website in two parts: a **public site** where visitors browse recipes without signing in, and an **admin app** where a signed-in admin creates and edits them. Both are Angular apps on top of one ASP.NET Core API built with the ABP framework.
 
-![Public site – home page](docs/screenshots/public-home.jpg)
+<picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/public-home-dark.jpg"><img alt="Public site – home page" src="docs/screenshots/public-home.jpg"></picture>
 
 | Recipe page | On a phone |
 |---|---|
-| ![Recipe page with ingredients and numbered steps](docs/screenshots/public-recipe.jpg) | ![Recipe page on a phone, ingredients first](docs/screenshots/public-recipe-mobile.jpg) |
+| <picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/public-recipe-dark.jpg"><img alt="Recipe page with ingredients and numbered steps" src="docs/screenshots/public-recipe.jpg"></picture> | <picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/public-recipe-mobile-dark.jpg"><img alt="Recipe page on a phone, ingredients first" src="docs/screenshots/public-recipe-mobile.jpg"></picture> |
 
 | Admin dashboard | Admin recipe form |
 |---|---|
